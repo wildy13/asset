@@ -9,7 +9,7 @@
 
         <!-- Delete Button -->
         <el-button type="danger" @click="handleDelete">
-          Delete
+          Delete Location
         </el-button>
 
         <!-- Search -->
