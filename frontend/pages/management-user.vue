@@ -1,0 +1,3 @@
+<template>
+  <UserdataManagementUser />
+</template>

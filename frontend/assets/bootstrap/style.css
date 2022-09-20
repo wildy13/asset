@@ -1,0 +1,11 @@
+.bg-img{
+    background-image: url('../img/assets.jpg.jpg');
+}
+
+.w-center{
+    margin-left: 37%;
+}
+
+.input-length{
+    width: 500px;
+}

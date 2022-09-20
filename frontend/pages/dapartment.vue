@@ -1,0 +1,3 @@
+<template>
+  <UserdataDapartment />
+</template>
