@@ -30,7 +30,7 @@
           <el-table-column type="index" label="No" />
           <el-table-column label="Category Code" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? categoryCodeId[scope.row.categoryId] : 'error' }}
+              {{ scope.row ? categoryCode[scope.row.categoryId] : 'error' }}
             </template>
           </el-table-column>
           <el-table-column label="Category Name" class="table-col">
@@ -74,7 +74,7 @@
         <span>
           <el-form ref="form" :model="form" :rules="rules">
             <el-form-item label="Asset Category" prop="categoryId" :label-width="formLabelWidth">
-              <el-select v-model="form.categoryId">
+              <el-select v-model="form.categoryId" @change="handleCategoryChange">
                 <el-option
                   v-for="item in selectDataCategory"
                   :key="item.id"
@@ -172,10 +172,11 @@ export default {
       form: {
         name: '',
         subcategoryCode: '',
-        categoryId: ''
+        categoryId: '',
+        categoryCode: ''
       },
       categoryId: [''],
-      categoryCodeId: [''],
+      categoryCode: [''],
       page: 1,
       pageSize: 5,
       pagerCount: 5,
@@ -211,7 +212,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        categoryCodeId: [
+        categoryCode: [
           {
             required: true,
             message: 'This field is required',
@@ -226,7 +227,8 @@ export default {
         id: '',
         name: '',
         subcategoryCode: '',
-        categoryId: ''
+        categoryId: '',
+        categoryCode: ''
       }
     }
   },
@@ -235,7 +237,8 @@ export default {
     ...mapGetters({
       loading: ['subcategory/getLoading'],
       subcategoryData: ['subcategory/getSubCategory'],
-      selectDataCategory: ['category/getCategory']
+      selectDataCategory: ['category/getCategory'],
+      selectDataSubCategory: ['subcategory/getSubCategory']
     }),
     pageTableData () {
       if (this.search) {
@@ -248,11 +251,11 @@ export default {
   async created () {
     if (process.browser) {
       try {
-        await this.fetchSubCategory()
+        await this.getSubCategory()
         await this.fetchCategory()
         this.miniSearch.addAll(this.subcategoryData)
         this.categoryId.push(...this.selectDataCategory.map(value => value.name))
-        this.categoryCodeId.push(...this.selectDataCategory.map(value => value.categoryCode))
+        this.categoryCode.push(...this.selectDataCategory.map(value => value.categoryCode))
       } catch (error) {
         this.$message({
           title: 'error',
@@ -263,7 +266,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('subcategory', ['inputSubCategory', 'fetchSubCategory', 'fetchDel', 'fetchEdit']),
+    ...mapActions('subcategory', ['inputSubCategory', 'getSubCategory', 'fetchSubCategory', 'fetchDel', 'fetchEdit']),
     ...mapActions('category', ['fetchCategory']),
     handleSizeChange (val) {
       this.pageSize = val
@@ -308,7 +311,6 @@ export default {
           name: this.form.name,
           subcategoryCode: this.form.subcategoryCode,
           categoryId: this.form.categoryId
-          /* categoryCodeId: this.form.categoryId */
         })
         this.$message({
           title: 'success',
@@ -334,12 +336,14 @@ export default {
           name: this.formEdit.name,
           subcategoryCode: this.formEdit.subcategoryCode,
           categoryId: this.formEdit.categoryId
-          /* categoryCodeId: this.formEdit.categoryId */
         })
         this.dialogVisible1 = false
       } catch (error) {
         console.log(error)
       }
+    },
+    async  handleCategoryChange (id) {
+      await this.fetchSubCategory({ id })
     }
   }
 }

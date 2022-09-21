@@ -33,16 +33,25 @@
               {{ scope.row ? categoryId[scope.row.categoryId] : 'error' }}
             </template>
           </el-table-column>
+          <!-- <el-table-column prop="subcategoryId" label="Sub Category Name" /> -->
           <el-table-column label="Sub Category Name" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? subcategoryId[scope.row.categoryId] : 'error' }}
+              {{ subcategoryId[scope.row.subcategoryId] }}
             </template>
           </el-table-column>
           <el-table-column prop="method" label="Method Name" />
           <el-table-column prop="type" label="Group Type" />
-          <el-table-column prop="rate" label="Rate" />
-          <el-table-column prop="life" label="Life" />
-          <el-table-column prop="creatDedAt" label="Created At" />
+          <el-table-column label="Rate">
+            <template slot-scope="scope">
+              {{ scope.row.rate }} %
+            </template>
+          </el-table-column>
+          <el-table-column label="Rate">
+            <template slot-scope="scope">
+              {{ scope.row.year }} Year
+            </template>
+          </el-table-column>
+          <el-table-column prop="createdAt" label="Created At" />
           <el-table-column prop="updatedAt" label="Updated At" />
           <el-table-column align="right">
             <template slot-scope="scope">
@@ -76,7 +85,7 @@
         <span>
           <el-form ref="form" :model="form" :rules="rules">
             <el-form-item label="Category Name " prop="categoryId" :label-width="formLabelWidth">
-              <el-select v-model="form.categoryId">
+              <el-select v-model="form.categoryId" @change="handleCategoryChange">
                 <el-option
                   v-for=" item in selectDataCategory"
                   :key="item.id"
@@ -122,7 +131,7 @@
             </el-form-item>
             <el-form-item label="Life" :label-width="formLabelWidth">
               <el-input
-                v-model="form.life"
+                v-model="form.year"
               />
             </el-form-item>
           </el-form>
@@ -163,13 +172,22 @@
             </el-form-item>
             <el-form-item label="Type Asset " prop="type" :label-width="formLabelWidth">
               <el-select v-model="formEdit.type">
-                <el-option>Bangunan</el-option>
-                <el-option>Non Bangunan</el-option>
+                <el-option
+                  v-for="item in type"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
             <el-form-item label="Methode " prop="method" :label-width="formLabelWidth">
               <el-select v-model="formEdit.method">
-                <el-option>Straight Line</el-option>
+                <el-option
+                  v-for="item in method"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                />
               </el-select>
             </el-form-item>
             <el-form-item label="Rate" :label-width="formLabelWidth">
@@ -179,7 +197,7 @@
             </el-form-item>
             <el-form-item label="Life" :label-width="formLabelWidth">
               <el-input
-                v-model="formEdit.life"
+                v-model="formEdit.year"
               />
             </el-form-item>
           </el-form>
@@ -231,7 +249,7 @@ export default {
       form: {
         type: '',
         rate: '',
-        life: '',
+        year: '',
         categoryId: '',
         subcategoryId: '',
         method: ''
@@ -280,7 +298,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        life: [
+        year: [
           {
             required: true,
             message: 'This field is required',
@@ -302,7 +320,7 @@ export default {
         id: '',
         type: '',
         rate: '',
-        life: '',
+        year: '',
         categoryId: '',
         subcategoryId: '',
         method: ''
@@ -330,8 +348,10 @@ export default {
       try {
         await this.fetchDepreciation()
         await this.fetchCategory()
-        await this.fetchSubCategory()
+        await this.getSubCategory()
         this.miniSearch.addAll(this.depreciationData)
+        this.categoryId.push(...this.selectDataCategory.map(value => value.name))
+        this.subcategoryId.push(...this.selectDataSubCategory.map(value => value.name))
       } catch (error) {
         this.$message({
           title: 'error',
@@ -344,7 +364,7 @@ export default {
   methods: {
     ...mapActions('depreciation', ['inputDepreciation', 'fetchDepreciation', 'fetchDel', 'fetchEdit']),
     ...mapActions('category', ['fetchCategory']),
-    ...mapActions('subcategory', ['fetchSubCategory']),
+    ...mapActions('subcategory', ['fetchSubCategory', 'getSubCategory']),
     handleSizeChange (val) {
       this.pageSize = val
     },
@@ -389,7 +409,7 @@ export default {
           subcategoryId: this.form.subcategoryId,
           type: this.form.type,
           rate: this.form.rate,
-          life: this.form.life,
+          year: this.form.year,
           method: this.form.method
 
         })
@@ -418,13 +438,16 @@ export default {
           subcategoryId: this.formEdit.subcategoryId,
           type: this.formEdit.type,
           rate: this.formEdit.rate,
-          life: this.formEdit.life,
+          year: this.formEdit.year,
           method: this.formEdit.method
         })
         this.dialogVisible1 = false
       } catch (error) {
         console.log(error)
       }
+    },
+    async  handleCategoryChange (id) {
+      await this.fetchSubCategory({ id })
     }
   }
 }
