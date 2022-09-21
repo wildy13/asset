@@ -27,13 +27,16 @@ export const getters = {
 
 export const actions = {
   async inputSubCategory ({ commit }, payload) {
-    console.log(payload)
     const res = await this.$axios.$post('/api/utility/subCategory', payload)
     commit('updateList', res)
   },
-  async fetchSubCategory ({ commit }) {
-    const roles = await this.$axios.$get('/api/utility/subCategory')
-    commit('setSubCategory', roles)
+  async getSubCategory ({ commit }, payload) {
+    const res = await this.$axios.$get('/api/utility/subCategory', payload)
+    commit('setSubCategory', res)
+  },
+  async fetchSubCategory ({ commit }, payload) {
+    const res = await this.$axios.$post('/api/utility/subCategory/filter', payload)
+    commit('setSubCategory', res)
   },
   async fetchDel ({ commit }, payload) {
     const res = await this.$axios.$post('/api/utility/subCategory/delete', { data: { payload } })

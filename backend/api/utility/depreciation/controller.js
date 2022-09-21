@@ -12,11 +12,13 @@ const getDepreciation = async (req, res) => {
 };
 
 const inputDepreciation = async (req, res) => {
+  console.log(req.body)
   const { id, type,method, year, rate, categoryId, subcategoryId, } = req.body;
   try {
-    const create = await Currency.create({
+    const create = await Depreciation.create({
       type,year,rate,method, categoryId,subcategoryId
     });
+    console.log(create)
     res.json({ data: create, msg: "yeay depreciation's in" });
   } catch (error) {
     if (id === Depreciation.id) {

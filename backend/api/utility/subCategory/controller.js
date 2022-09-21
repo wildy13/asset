@@ -11,6 +11,23 @@ const getSubCategory = async (req, res) => {
   }
 };
 
+const filterSubCategory = async (req, res) => {
+  try {
+    console.log(req.body)
+    console.log('tes')
+  const subcategory = await SubCategory.findAll({
+      attributes: ['id', 'name','subcategoryCode','categoryId'],
+      where: {
+        categoryId: req.body.id
+      }
+    });
+    res.json(subcategory); 
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+
 const inputSubCategory = async (req, res) => {
   const { id, name, subcategoryCode, categoryId} = req.body;
   try {
@@ -57,4 +74,4 @@ const editSubCategory = async(req, res) => {
   res.status(200).json(save) 
 }
 
-module.exports = { getSubCategory, inputSubCategory, deleteSubCategory, editSubCategory};
+module.exports = { getSubCategory, filterSubCategory, inputSubCategory, deleteSubCategory, editSubCategory};

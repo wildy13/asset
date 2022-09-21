@@ -5,13 +5,13 @@ const { getCategory, inputCategory, deleteCategory, editCategory } = require('./
 const router = new Router();
 
 // Get Router
-router.get('/',hasRole(2), getCategory);
+router.get('/',hasRole(1), getCategory);
 
 // POST Router
-router.post('/',hasRole(2), inputCategory);
-router.post('/delete',hasRole(2), deleteCategory)
+router.post('/',hasRole(1), inputCategory);
+router.post('/delete',hasRole(1), deleteCategory)
 
 //PUT Router
-router.put('/:id',hasRole(2), editCategory)
+router.put('/:id',hasRole(1), editCategory)
 
 module.exports = router;
