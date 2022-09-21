@@ -103,7 +103,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   data () {
     return {
-      activeIndex: ''
+      activeIndex: 'dapartement'
     }
   },
 
@@ -129,14 +129,7 @@ export default {
 
   methods: {
     ...mapActions('auth', ['fetchMe', 'fetchLogout']),
-
-    /* async logout () {
-      await this.$auth.logout()
-    }, */
-
     async handleSelect (key, keyPath) {
-      console.log(key)
-      console.log(keyPath)
       if (key === 'logout') {
         await this.$auth.logout()
       } else { this.$router.push(key, keyPath) }
