@@ -32,9 +32,12 @@ export const actions = {
     const res = await this.$axios.$post('api/section', payload)
     commit('updateList', res)
   },
-
-  async fetchSection ({ commit }, payload) {
+  async getSection ({ commit }, payload) {
     const section = await this.$axios.$get('api/section', payload)
+    commit('setSection', section)
+  },
+  async fetchSection ({ commit }, payload) {
+    const section = await this.$axios.$post('api/section/filter', payload)
     commit('setSection', section)
   },
 

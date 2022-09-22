@@ -110,7 +110,7 @@
             <div class="flex flex-wrap -mx-2 mb-2">
               <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
                 <el-form-item label="Dapartment" prop="dapartment">
-                  <el-select v-model="form.dapartement">
+                  <el-select v-model="form.dapartement" @change="handleDapartementChange">
                     <el-option
                       v-for="item in selectDataDapartment"
                       :key="item.id"
@@ -370,7 +370,7 @@ export default {
         this.miniSearch.addAll(this.usersData)
         await this.fetchRoles()
         await this.fetchDapartment()
-        await this.fetchSection()
+        await this.getSection()
         this.roles.push(...this.selectDataRole.map(value => value.name))
         this.dapartement.push(...this.selectDataDapartment.map(value => value.name))
         this.section.push(...this.selectDataSection.map(value => value.name))
@@ -388,7 +388,7 @@ export default {
     ...mapActions('users', ['fetchUsers', 'createUser', 'fetchDel', 'fetchEdit']),
     ...mapActions('roles', ['fetchRoles']),
     ...mapActions('dapartment', ['fetchDapartment']),
-    ...mapActions('section', ['fetchSection']),
+    ...mapActions('section', ['fetchSection', 'getSection']),
     handleSizeChange (val) {
       this.pageSize = val
     },
@@ -465,6 +465,9 @@ export default {
       } catch (error) {
         console.log(error)
       }
+    },
+    async handleDapartementChange (id) {
+      await this.fetchSection({ id })
     }
   }
 }

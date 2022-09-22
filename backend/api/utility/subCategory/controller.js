@@ -13,8 +13,6 @@ const getSubCategory = async (req, res) => {
 
 const filterSubCategory = async (req, res) => {
   try {
-    console.log(req.body)
-    console.log('tes')
   const subcategory = await SubCategory.findAll({
       attributes: ['id', 'name','subcategoryCode','categoryId'],
       where: {

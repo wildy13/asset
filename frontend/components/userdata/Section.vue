@@ -227,7 +227,7 @@ export default {
   async created () {
     if (process.browser) {
       try {
-        await this.fetchSection()
+        await this.getSection()
         this.miniSearch.addAll(this.sectionData)
         await this.fetchDapartment()
         this.dapartment.push(...this.selectData.map(value => value.name))
@@ -241,7 +241,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('section', ['inputSection', 'fetchSection', 'fetchDel', 'fetchEdit']),
+    ...mapActions('section', ['inputSection', 'getSection', 'fetchDel', 'fetchEdit']),
     ...mapActions('dapartment', ['fetchDapartment']),
     handleSizeChange (val) {
       this.pageSize = val
