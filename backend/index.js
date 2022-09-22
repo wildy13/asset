@@ -7,6 +7,7 @@ const Section = require('./api/section/model');
 const User = require('./api/user/model');
 const SubCategory = require('./api/utility/subCategory/model');
 const Category = require('./api/utility/category/model');
+const Assets = require('./api/asset/model');
 const app = express();
 app.use(cors());
 app.use(express.json());
@@ -24,7 +25,7 @@ const connect = async () => {
 const start = async () => {
   try {
     router(app);
-  //  Category.sync({ force:true })       // <------Force Model to database
+   //Assets.sync({ force:true })       // <------Force Model to database
     app.listen({ port, host }, () => console.log(`Server running on port ${port}`));
     await connect();
   } catch (err) {
