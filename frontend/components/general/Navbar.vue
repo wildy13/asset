@@ -27,7 +27,7 @@
       <el-menu-item index="location">
         location
       </el-menu-item>
-      <el-menu-item index="AdjustmentAsset">
+      <el-menu-item index="adjustment-asset">
         Adjustment Asset
       </el-menu-item>
     </el-submenu>

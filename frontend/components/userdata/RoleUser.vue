@@ -1,14 +1,14 @@
 <template>
   <el-container>
     <div>
-      <div class="flex justify-between  mt-2">
+      <div class="flex justify-between  mt-2 ml-2">
         <!-- Add Button -->
-        <el-button type="primary" @click="dialogVisible = true">
-          Add User
+        <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
+          Add Role
         </el-button>
 
         <!-- Delete Button -->
-        <el-button type="danger" @click="handleDelete">
+        <el-button type="danger" icon="el-icon-delete" @click="handleDelete">
           Delete
         </el-button>
 
@@ -252,7 +252,13 @@ export default {
         })
         this.dialogVisible1 = false
       } catch (error) {
-        console.log(error)
+        if (error.response) {
+          this.$message({
+            title: 'error',
+            message: error.response.data.msg,
+            type: 'error'
+          })
+        }
       }
     }
   }
