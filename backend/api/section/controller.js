@@ -11,6 +11,19 @@ const getSection = async (req, res) => {
     res.status(400).send(error);
   }
 };
+const filterSection = async (req, res) => {
+  try {
+    const section = await Section.findAll({
+      attributes: ['id','sectionCode', 'name','dapartmentId', 'createdAt', 'updatedAt'],
+      where:{
+        dapartmentId: req.body.id
+      }
+    });
+    res.json(section);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
 
 const inputSection = async (req, res) => {
   const { id, sectionCode, dapartmentId ,name } = req.body;
@@ -56,4 +69,4 @@ const editSection = async(req, res) => {
   res.status(200).json(save) 
 }
 
-module.exports = { getSection, inputSection, deleteSection, editSection};
+module.exports = { getSection, filterSection, inputSection, deleteSection, editSection};
