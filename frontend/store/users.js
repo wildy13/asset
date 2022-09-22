@@ -52,7 +52,6 @@ export const actions = {
   },
 
   async changePassword ({ commit }, payload) {
-    console.log(payload)
     const res = await this.$axios.$put('api/user/change-password', payload)
     commit('changePassword', res)
   }

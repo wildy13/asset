@@ -27,7 +27,6 @@ export const getters = {
 
 export const actions = {
   async inputLocation ({ commit }, payload) {
-    console.log(payload)
     const res = await this.$axios.$post('/api/utility/location', payload)
     commit('updateList', res)
   },

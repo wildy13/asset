@@ -62,7 +62,13 @@ export default {
           password: this.form.oldPass
         })
       } catch (error) {
-        console.log(error)
+        if (error.response) {
+          this.$message({
+            title: 'error',
+            message: error.response.data.msg,
+            type: 'error'
+          })
+        }
       }
     }
   }

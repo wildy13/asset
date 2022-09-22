@@ -20,8 +20,8 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     'vue/html-self-closing': 0,
     'vue/no-multiple-template-root': 0,
-    'no-console': 0,
     'vue/no-side-effects-in-computed-properties': 0,
-    'eol-last': 0
+    'eol-last': 0,
+    'no-empty': 0
   }
 }
