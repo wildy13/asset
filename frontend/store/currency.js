@@ -31,8 +31,8 @@ export const actions = {
     commit('updateList', res)
   },
   async fetchCurrency ({ commit }) {
-    const roles = await this.$axios.$get('/api/utility/currency')
-    commit('setCurrency', roles)
+    const res = await this.$axios.$get('/api/utility/currency')
+    commit('setCurrency', res)
   },
   async fetchDel ({ commit }, payload) {
     const res = await this.$axios.$post('/api/utility/currency/delete', { data: { payload } })

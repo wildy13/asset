@@ -91,6 +91,22 @@ const Assets = sequelize.define(
       exchange: {
         type: DataTypes.INTEGER,
         allowNull: false
+      },
+      type: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      method: {
+        type: DataTypes.STRING,
+        allowNull: false
+      },
+      rate: {
+        type: DataTypes.DECIMAL,
+        allowNull: false
+      },
+      year: {
+        type: DataTypes.INTEGER,
+        allowNull:false
       }
   },
   {

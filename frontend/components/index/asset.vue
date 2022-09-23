@@ -1,7 +1,6 @@
 <template>
   <el-container>
     <div>
-      {{ depreciationData }}
       <div class="flex justify-between  mt-2 ml-2">
         <!-- Add Button -->
         <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
@@ -241,6 +240,7 @@ export default {
         fields: ['name'],
         storeFields: ['name', 'currencyCode', 'currencySymbol', 'createdAt', 'updatedAt']
       }),
+
       rules: {
         name: [
           {
@@ -379,9 +379,10 @@ export default {
     ...mapActions('section', ['fetchSection', 'getSection']),
     ...mapActions('currency', ['fetchCurrency']),
     ...mapActions('depreciation', ['filterDepreciation']),
+    ...mapActions('assets', ['inputAssets', 'fetchAssets', 'fetchDel', 'fetchEdit']),
     onSave () {
       try {
-        this.inputAsset({
+        this.inputAssets({
           name: this.form.name,
           brandModel: this.form.brandModel,
           categoryId: this.form.categoryId,
@@ -394,7 +395,11 @@ export default {
           qty: this.form.qty,
           currency: this.form.currency,
           price: this.form.price,
-          exchange: this.form.exchange
+          exchange: this.form.exchange,
+          method: this.formChange.method,
+          type: this.formChange.type,
+          rate: this.formChange.rate,
+          year: this.formChange.year
         })
         this.$message({
           title: 'success',

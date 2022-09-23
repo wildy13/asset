@@ -31,8 +31,8 @@ export const actions = {
     commit('updateList', res)
   },
   async fetchLocation ({ commit }) {
-    const roles = await this.$axios.$get('/api/utility/location')
-    commit('setLocation', roles)
+    const res = await this.$axios.$get('/api/utility/location')
+    commit('setLocation', res)
   },
   async fetchDel ({ commit }, payload) {
     const res = await this.$axios.$post('/api/utility/location/delete', { data: { payload } })
