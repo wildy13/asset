@@ -31,8 +31,12 @@ export const actions = {
     commit('updateList', res)
   },
   async fetchDepreciation ({ commit }) {
-    const roles = await this.$axios.$get('/api/utility/depreciation')
-    commit('setDepreciation', roles)
+    const res = await this.$axios.$get('/api/utility/depreciation')
+    commit('setDepreciation', res)
+  },
+  async filterDepreciation ({ commit }, payload) {
+    const res = await this.$axios.$post('/api/utility/depreciation/filter', payload)
+    commit('setDepreciation', res)
   },
   async fetchDel ({ commit }, payload) {
     const res = await this.$axios.$post('/api/utility/depreciation/delete', { data: { payload } })

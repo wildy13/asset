@@ -1,6 +1,7 @@
 <template>
   <el-container>
     <div>
+      {{ depreciationData }}
       <div class="flex justify-between  mt-2 ml-2">
         <!-- Add Button -->
         <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
@@ -65,7 +66,7 @@
                   </el-select>
                 </el-form-item>
                 <el-form-item label="Sub Category " prop="subcategoryId" class="flex">
-                  <el-select v-model="form.subcategoryId" class="block ml-2">
+                  <el-select v-model="form.subcategoryId" class="block ml-2" @change="handleSubCategoryChange">
                     <el-option
                       v-for=" item in selectDataSubCategory"
                       :key="item.id"
@@ -140,6 +141,23 @@
                   <el-input v-model="form.exchange" class="block ml-2" placeholder="Input 1 For USD Currency" />
                 </el-form-item>
                 <b>B. Depreciation</b>
+                <el-form-item label="Asset Non Depreciation" property="nonDepreciation" class="flex">
+                  <el-checkbox v-model="checked" class="block ml-2" disabled />
+                </el-form-item>
+                <div>*This field will be checked if the category of asset didn't have</div>
+                <div>depreciation.</div>
+                <el-form-item label="Group of asset" prop="type" class="flex">
+                  <el-input v-model="formChange.type" class="block ml-2" disabled />
+                </el-form-item>
+                <el-form-item label="Methode" prop="method" class="flex">
+                  <el-input v-model="formChange.method" class="block ml-2" disabled />
+                </el-form-item>
+                <el-form-item label="Rates" prop="rate" class="flex">
+                  <el-input v-model="formChange.rate" class="block ml-2" disabled />
+                </el-form-item>
+                <el-form-item label="Life" prop="year" class="flex">
+                  <el-input v-model="formChange.year" class="block ml-2" disabled />
+                </el-form-item>
               </div>
             </div>
           </el-form>
@@ -161,6 +179,7 @@ export default {
     return {
       dialogVisible: false,
       radio: '1',
+      checked: false,
       condition: [
         {
           value: 'New',
@@ -181,6 +200,7 @@ export default {
           label: 'In Use'
         }
       ],
+      /* form */
       form: {
         name: '',
         brandModel: '',
@@ -196,11 +216,26 @@ export default {
         price: '',
         exchange: ''
       },
+      formChange: {
+        method: '',
+        year: '',
+        type: '',
+        rate: ''
+      },
+      /* end of form */
+
+      /* array  */
       categoryId: [''],
       subcategoryId: [''],
       dapartement: [''],
       currency: [''],
       section: [''],
+      method: [''],
+      rate: [''],
+      year: [''],
+      type: [''],
+      /* end of array */
+
       miniSearch: new MiniSearch({
         idField: ['id'],
         fields: ['name'],
@@ -308,7 +343,8 @@ export default {
       selectDataSubCategory: ['subcategory/getSubCategory'],
       selectDataSection: ['section/getSections'],
       selectDataDapartment: ['dapartment/getDapartments'],
-      selectDataCurrency: ['currency/getCurrency']
+      selectDataCurrency: ['currency/getCurrency'],
+      depreciationData: ['depreciation/getDepreciation']
     })
   },
 
@@ -342,6 +378,7 @@ export default {
     ...mapActions('dapartment', ['fetchDapartment']),
     ...mapActions('section', ['fetchSection', 'getSection']),
     ...mapActions('currency', ['fetchCurrency']),
+    ...mapActions('depreciation', ['filterDepreciation']),
     onSave () {
       try {
         this.inputAsset({
@@ -380,6 +417,10 @@ export default {
     },
     async handleDapartementChange (id) {
       await this.fetchSection({ id })
+    },
+    async handleSubCategoryChange (id) {
+      await this.filterDepreciation({ id })
+      this.formChange = { ...this.depreciationData }
     }
   }
 }

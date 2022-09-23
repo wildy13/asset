@@ -11,6 +11,20 @@ const getDepreciation = async (req, res) => {
   }
 };
 
+const filterDepreciation = async (req, res) => {
+  try {
+    const depreciation = await Depreciation.findOne({
+      attributes: ['id', 'type','year','rate','method','categoryId','subcategoryId', 'createdAt', 'updatedAt'],
+      where: {
+        id: req.body.id
+      }
+    });
+    res.json(depreciation);
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
 const inputDepreciation = async (req, res) => {
   console.log(req.body)
   const { id, type,method, year, rate, categoryId, subcategoryId, } = req.body;
@@ -66,4 +80,4 @@ const editDepreciation = async(req, res) => {
   res.status(200).json(save) 
 }
 
-module.exports = { getDepreciation, inputDepreciation, deleteDepreciation, editDepreciation};
+module.exports = { getDepreciation, filterDepreciation, inputDepreciation, deleteDepreciation, editDepreciation};
