@@ -34,8 +34,8 @@ export const actions = {
   },
 
   async fetchDapartment ({ commit }, payload) {
-    const dapartments = await this.$axios.$get('api/dapartment', payload)
-    commit('setDapartments', dapartments)
+    const res = await this.$axios.$get('api/dapartment', payload)
+    commit('setDapartments', res)
   },
 
   async fetchDel ({ commit }, payload) {

@@ -31,8 +31,8 @@ export const actions = {
     commit('updateList', res)
   },
   async fetchCategory ({ commit }) {
-    const roles = await this.$axios.$get('/api/utility/category')
-    commit('setCategory', roles)
+    const res = await this.$axios.$get('/api/utility/category')
+    commit('setCategory', res)
   },
   async fetchDel ({ commit }, payload) {
     const res = await this.$axios.$post('/api/utility/category/delete', { data: { payload } })

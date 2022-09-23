@@ -37,8 +37,8 @@ export const actions = {
   },
 
   async fetchUsers ({ commit }, payload) {
-    const users = await this.$axios.$get('api/user', payload)
-    commit('setUsers', users)
+    const res = await this.$axios.$get('api/user', payload)
+    commit('setUsers', res)
   },
 
   async fetchDel ({ commit }, payload) {

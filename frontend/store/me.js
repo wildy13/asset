@@ -14,7 +14,7 @@ export const getters = {
 
 export const actions = {
   async fetchMe ({ commit }) {
-    const me = await this.$axios.$get('/api/user/me')
-    commit('setMe', me)
+    const res = await this.$axios.$get('/api/user/me')
+    commit('setMe', res)
   }
 }
