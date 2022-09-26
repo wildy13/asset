@@ -9,10 +9,10 @@ app.use(cors());
 app.use(express.json());
 app.use(verifyToken);
 
-const connect = async (res) => {
+const connect = async () => {
   try {
     await sequelize.authenticate();
-    res.status(200).json('Connection has been established successfully.');
+    console.log('Connection has been established successfully.');
   } catch (err) {
     throw new Error(err);
   }
@@ -22,7 +22,7 @@ const start = async () => {
   try {
     router(app);
     // Assets.sync({ force:true })       // <------Force Model to database
-    app.listen({ port, host }, (res) => res.status(200).json(`Server running on port ${port}`));
+    app.listen({ port, host }, () => console.log(`Server running on port ${port}`));
     await connect();
   } catch (err) {
     process.exit(1);
