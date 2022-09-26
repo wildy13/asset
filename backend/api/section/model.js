@@ -12,9 +12,9 @@ const Section = sequelize.define(
       autoIncrement: true,
     },
     sectionCode: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
@@ -28,9 +28,9 @@ const Section = sequelize.define(
       type: DataTypes.INTEGER,
       references: {
         model: Dapartment,
-        key: 'id'
-      }
-    }
+        key: 'id',
+      },
+    },
   },
   {
     tableName: 'tblSection',

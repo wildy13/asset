@@ -43,4 +43,4 @@ const setup = (User) => {
   );
 };
 
-module.exports =  setup ;
+module.exports = setup;

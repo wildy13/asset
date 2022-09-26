@@ -13,6 +13,7 @@ const User = sequelize.define(
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
       allowNull: false,
+      autoIncrement: true,
     },
 
     employeeNo: {
@@ -43,18 +44,26 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        isEmail: true
-      }
+        isEmail: true,
+      },
     },
 
-    dapartement: {
-      type: DataTypes.STRING,
-      allowNull: false
+    dapartementId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Dapartment,
+        key: 'id',
+      },
     },
 
-    section: {
-      type: DataTypes.STRING,
-      allowNull: false
+    sectionId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: Section,
+        key: 'id',
+      },
     },
 
     roleId: {
