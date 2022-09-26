@@ -3,20 +3,16 @@ const cors = require('cors');
 const router = require('./router');
 const { sequelize, config: { host, port } } = require('./config');
 const { verifyToken } = require('./api/auth/service');
-const Section = require('./api/section/model');
-const User = require('./api/user/model');
-const SubCategory = require('./api/utility/subCategory/model');
-const Category = require('./api/utility/category/model');
-const Assets = require('./api/asset/model');
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(verifyToken);
 
-const connect = async () => {
+const connect = async (res) => {
   try {
     await sequelize.authenticate();
-    console.log('Connection has been established successfully.');
+    res.status(200).json('Connection has been established successfully.');
   } catch (err) {
     throw new Error(err);
   }
@@ -25,8 +21,8 @@ const connect = async () => {
 const start = async () => {
   try {
     router(app);
-   //Assets.sync({ force:true })       // <------Force Model to database
-    app.listen({ port, host }, () => console.log(`Server running on port ${port}`));
+    // Assets.sync({ force:true })       // <------Force Model to database
+    app.listen({ port, host }, (res) => res.status(200).json(`Server running on port ${port}`));
     await connect();
   } catch (err) {
     process.exit(1);

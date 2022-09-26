@@ -67,32 +67,25 @@ const isAuthenticated = () => async (req, res, next) => {
 };
 
 const hasRole = (role) => async (req, res, next) => {
-  console.log(userRoles)
   if (!req.auth) {
     res.status(401).json('Access Denied / Forbidden');
+  } else if (userRoles.indexOf(role) <= userRoles.indexOf(req.auth.roleId)) {
+    next();
   } else {
-    if (userRoles.indexOf(role) <= userRoles.indexOf(req.auth.roleId)) {
-      next();
-    } else {
-      res.status(401).json('Access Denied / Forbidden');
-    }
+    res.status(401).json('Access Denied / Forbidden');
   }
 };
 
-
 const isAdmin = () => async (req, res, next) => {
-  console.log(req.auth)
   if (!req.auth) {
     res.status(401).json('Access Denied / Forbidden');
+  } else if (req.auth.roleId === 2) {
+    next();
   } else {
-    if (req.auth.roleId === 2 ) {
-      next();
-    } else {
-      res.status(401).json('Access Denied / Forbidden');
-    }
+    res.status(401).json('Access Denied / Forbidden');
   }
 };
 
 module.exports = {
-  verifyToken, signToken, isAuthenticated, hasRole,isAdmin
+  verifyToken, signToken, isAuthenticated, hasRole, isAdmin,
 };

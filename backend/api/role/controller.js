@@ -25,33 +25,35 @@ const inputRole = async (req, res) => {
   }
 };
 
-const deleteRoles = async(req,res) => {
- await Promise.all(
-    req.body.data.payload.map(async(payload)=> {
-     await Role.destroy({
+const deleteRoles = async (req, res) => {
+  await Promise.all(
+    req.body.data.payload.map(async (payload) => {
+      await Role.destroy({
         where: {
-          id:payload.id
-        }
-      })
-    })
-  )
+          id: payload.id,
+        },
+      });
+    }),
+  );
   return res.json(req.body.data.payload);
 };
 
-const editRoles = async(req, res) => {
-   const role =  await Role.findOne({
+const editRoles = async (req, res) => {
+  const role = await Role.findOne({
     attributes: [
-      "id",
-      "name"
+      'id',
+      'name',
     ],
     where: {
-      id: req.params.id
-    }
-  })
-  role.name = req.body.name
+      id: req.params.id,
+    },
+  });
+  role.name = req.body.name;
 
-  const save = await role.save()
-  res.status(200).json(save) 
-}
+  const save = await role.save();
+  res.status(200).json(save);
+};
 
-module.exports = { getRole, inputRole, deleteRoles, editRoles};
+module.exports = {
+  getRole, inputRole, deleteRoles, editRoles,
+};

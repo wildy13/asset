@@ -11,9 +11,9 @@ const Dapartment = sequelize.define(
       autoIncrement: true,
     },
     dapartmentCode: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      allowNull: false,
     },
     name: {
       type: DataTypes.STRING,
