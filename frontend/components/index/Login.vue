@@ -50,7 +50,7 @@
       <div class="flex justify-center space-x-2">
         <div class="text-white">
           Version
-          <a href="" class="font-bold">1.0.0</a>
+          <a href="" class="font-bold text-blue-600">1.0.0</a>
         </div>
       </div>
     </div>

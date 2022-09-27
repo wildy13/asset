@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { hasRole } = require('../auth/controller');
+const { hasRole } = require('../auth/service');
 const {
   getAssets, inputAssets, deleteAssets, editAssets,
 } = require('./controller');
@@ -10,7 +10,7 @@ const router = new Router();
 router.get('/', hasRole(1), getAssets);
 
 // POST Router
-router.post('/', hasRole(1), inputAssets);
+router.post('/', inputAssets);
 router.post('/delete', hasRole(1), deleteAssets);
 
 // PUT Router

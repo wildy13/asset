@@ -1,7 +1,7 @@
 <template>
   <el-menu
     :default-active="activeIndex"
-    class="el-menu-demo"
+    class="min-w-max"
     mode="horizontal"
     @select="handleSelect"
   >
@@ -89,10 +89,10 @@
     <el-menu-item index="change-password">
       Change Password
     </el-menu-item>
-    <el-menu-item style="margin-left: 790px">
+    <el-menu-item style="margin-left: 400px;">
       logged in as {{ $auth.user.username }}
     </el-menu-item>
-    <el-menu-item index="logout">
+    <el-menu-item index="logout" style="justify-content: end; align-items: center;">
       Logout
     </el-menu-item>
   </el-menu>
