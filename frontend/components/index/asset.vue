@@ -24,10 +24,63 @@
 
         <!-- Search -->
         <el-input
-          class="ml-250  w-1"
+          class="w-1 ml-500"
           placeholder="search data Data in Here"
         />
       </div>
+
+      <!-- Table -->
+      <div>
+        <el-table
+          ref="multipleTable"
+          :data="pageTableData"
+          class="tableUser"
+          layout="prev, pager, next "
+          :total="1000"
+        >
+          <el-table-column type="index" label="No" class="table-col" />l
+          <el-table-column label="Category">
+            <template slot-scope="scope">
+              {{ scope.row ? categoryId[scope.row.categoryId] : 'error' }}
+            </template>
+          </el-table-column>
+          <el-table-column label="Sub Category">
+            <template slot-scope="scope">
+              {{ scope.row ? subcategoryId[scope.row.subcategoryId] : 'error' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="name" label="Asset Name" />
+          <el-table-column prop="brandModel" label="Brand & Model" />
+          <el-table-column prop="po" label="PO NO" />
+          <el-table-column prop="condition" label="Condition" />
+          <el-table-column prop="status" label=" Status" />
+          <el-table-column prop="date" label="Date of Purchase" />
+          <el-table-column label="OR CUR">
+            <template slot-scope="scope">
+              {{ scope.row ? currency[scope.row.currencyId] : 'error' }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="price" label="Cost" />
+          <el-table-column label="Date Allocation">
+            -
+          </el-table-column>
+          <el-table-column label="Tipe">
+            T
+          </el-table-column>
+          <el-table-column align="right">
+            <template slot-scope="scope">
+              <el-button
+                size="mini"
+                @click="handleEdit(scope.row), dialogVisible1 =true"
+              >
+                Edit
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+
+      <!-- add Dialog -->
       <el-dialog title="A. Detail Asset" :visible.sync="dialogVisible">
         <span>
           <el-form
@@ -94,8 +147,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Dapartment" prop="dapartment" class="flex">
-                  <el-select v-model="form.dapartement" class="block ml-2" @change="handleDapartementChange">
+                <el-form-item label="Dapartment" prop="dapartmentId" class="flex">
+                  <el-select v-model="form.dapartmentId" class="block ml-2" @change="handleDapartementChange">
                     <el-option
                       v-for="item in selectDataDapartment"
                       :key="item.id"
@@ -104,8 +157,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Section" prop="section" class="flex">
-                  <el-select v-model="form.section" class="block ml-2">
+                <el-form-item label="Section" prop="sectionId" class="flex">
+                  <el-select v-model="form.sectionId" class="block ml-2">
                     <el-option
                       v-for="item in selectDataSection"
                       :key="item.id"
@@ -125,8 +178,8 @@
                 </el-form-item>
               </div>
               <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Section" prop="currency" class="flex">
-                  <el-select v-model="form.currency" class="block ml-2 w-5">
+                <el-form-item label="Purchase Price" prop="currencyId" class="flex">
+                  <el-select v-model="form.currencyId" class="block ml-2 w-5">
                     <el-option
                       v-for="item in selectDataCurrency"
                       :key="item.id"
@@ -206,20 +259,36 @@ export default {
         categoryId: '',
         subcategoryId: '',
         condition: '',
-        dapartement: '',
-        section: '',
+        dapartmentId: '',
+        sectionId: '',
         po: '',
         date: '',
         qty: '',
-        currency: '',
+        currencyId: '',
         price: '',
-        exchange: ''
+        exchange: '',
+        status: ''
       },
       formChange: {
         method: '',
         year: '',
         type: '',
         rate: ''
+      },
+      formEdit: {
+        name: '',
+        brandModel: '',
+        categoryId: '',
+        subcategoryId: '',
+        condition: '',
+        dapartmentId: '',
+        sectionId: '',
+        po: '',
+        date: '',
+        currencyId: '',
+        price: '',
+        exchange: '',
+        status: ''
       },
       /* end of form */
 
@@ -344,7 +413,8 @@ export default {
       selectDataSection: ['section/getSections'],
       selectDataDapartment: ['dapartment/getDapartments'],
       selectDataCurrency: ['currency/getCurrency'],
-      depreciationData: ['depreciation/getDepreciation']
+      depreciationData: ['depreciation/getDepreciation'],
+      pageTableData: ['assets/getAssets']
     })
   },
 
@@ -356,6 +426,7 @@ export default {
         await this.fetchDapartment()
         await this.fetchCurrency()
         await this.getSection()
+        await this.fetchAssets()
         this.miniSearch.addAll(this.depreciationData)
         this.categoryId.push(...this.selectDataCategory.map(value => value.name))
         this.subcategoryId.push(...this.selectDataSubCategory.map(value => value.name))
@@ -388,18 +459,19 @@ export default {
           categoryId: this.form.categoryId,
           subcategoryId: this.form.subcategoryId,
           condition: this.form.condition,
-          dapartement: this.form.dapartement,
-          section: this.form.section,
+          dapartmentId: this.form.dapartmentId,
+          sectionId: this.form.sectionId,
           po: this.form.po,
           date: this.form.date,
           qty: this.form.qty,
-          currency: this.form.currency,
+          currencyId: this.form.currencyId,
           price: this.form.price,
           exchange: this.form.exchange,
           method: this.formChange.method,
           type: this.formChange.type,
           rate: this.formChange.rate,
-          year: this.formChange.year
+          year: this.formChange.year,
+          status: this.form.status
         })
         this.$message({
           title: 'success',
@@ -426,6 +498,9 @@ export default {
     async handleSubCategoryChange (id) {
       await this.filterDepreciation({ id })
       this.formChange = { ...this.depreciationData }
+    },
+    handleEdit (payload) {
+      this.formEdit = { ...payload }
     }
   }
 }

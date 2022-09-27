@@ -58,7 +58,7 @@ const Assets = sequelize.define(
         key: 'id',
       },
     },
-    sectiontId: {
+    sectionId: {
       type: DataTypes.INTEGER,
       references: {
         model: Section,
@@ -66,7 +66,7 @@ const Assets = sequelize.define(
       },
     },
     po: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     date: {

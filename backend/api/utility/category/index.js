@@ -10,7 +10,7 @@ const router = new Router();
 router.get('/', hasRole(1), getCategory);
 
 // POST Router
-router.post('/', hasRole(1), inputCategory);
+router.post('/', inputCategory);
 router.post('/delete', hasRole(1), deleteCategory);
 
 // PUT Router

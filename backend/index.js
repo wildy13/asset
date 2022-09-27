@@ -3,6 +3,7 @@ const cors = require('cors');
 const router = require('./router');
 const { sequelize, config: { host, port } } = require('./config');
 const { verifyToken } = require('./api/auth/service');
+const Assets = require('./api/asset/model');
 
 const app = express();
 app.use(cors());
@@ -21,7 +22,7 @@ const connect = async () => {
 const start = async () => {
   try {
     router(app);
-    // Assets.sync({ force:true })       // <------Force Model to database
+    //Assets.sync({ force:true })       // <------Force Model to database
     app.listen({ port, host }, () => console.log(`Server running on port ${port}`));
     await connect();
   } catch (err) {

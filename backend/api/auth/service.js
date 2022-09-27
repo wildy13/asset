@@ -66,10 +66,10 @@ const isAuthenticated = () => async (req, res, next) => {
   }
 };
 
-const hasRole = (role) => async (req, res, next) => {
+const hasRole = (roleId) => async (req, res, next) => {
   if (!req.auth) {
     res.status(401).json('Access Denied / Forbidden');
-  } else if (userRoles.indexOf(role) <= userRoles.indexOf(req.auth.roleId)) {
+  } else if (userRoles.indexOf(roleId) <= userRoles.indexOf(req.auth.roleId)) {
     next();
   } else {
     res.status(401).json('Access Denied / Forbidden');

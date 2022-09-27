@@ -12,7 +12,7 @@ export const mutations = {
     state.assets.splice(index, 1)
   },
   updateList (state, res) {
-    state.assets.push(res.data)
+    state.assets.push(res)
   },
   updateAssets (state, res) {
     const index = state.assets.findIndex(u => u.id === res.id)
