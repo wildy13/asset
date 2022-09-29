@@ -1,0 +1,46 @@
+*   [33mc9cf3ce[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m Merge branch 'dev'
+[31m|[m[32m\[m  
+[31m|[m * [33m9fc6f9b[m[33m ([m[1;32mdev[m[33m)[m fixed & modifed
+* [32m|[m   [33m316c505[m[33m ([m[1;32mtest[m[33m)[m Merge branch 'fix'
+[32m|[m[34m\[m [32m\[m  
+[32m|[m [34m|[m[32m/[m  
+[32m|[m[32m/[m[34m|[m   
+[32m|[m * [33mc5864eb[m[33m ([m[1;32mfix[m[33m)[m fixed
+* [34m|[m [33m5806753[m Merge branch 'fix'
+[35m|[m[34m\[m[34m|[m 
+[35m|[m * [33m3913555[m fixed
+* [36m|[m [33m7ed2943[m Merge branch 'fix'
+[1;31m|[m[36m\[m[36m|[m 
+[1;31m|[m * [33m07724b9[m fixed
+[1;31m|[m[1;31m/[m  
+*   [33mca4b609[m Merge branch 'addAssetPage'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33m3934974[m[33m ([m[1;32maddAssetPage[m[33m)[m add asset
+* [1;34m|[m [33m5fbce4f[m Merge branch 'addAssetPage'
+[1;35m|[m[1;34m\[m[1;34m|[m 
+[1;35m|[m * [33m9e3ed96[m add of asset
+* [1;36m|[m [33m32c625e[m[33m ([m[1;32mdescription[m[33m)[m Merge branch 'addAssetPage'
+[31m|[m[1;36m\[m[1;36m|[m 
+[31m|[m * [33m1886c41[m add Assets
+[31m|[m[31m/[m  
+*   [33m66bccaa[m Merge branch 'icon'
+[33m|[m[34m\[m  
+[33m|[m * [33m342ba31[m icon
+[33m|[m[33m/[m  
+*   [33m99c0bc6[m Merge branch 'dev'
+[35m|[m[36m\[m  
+[35m|[m * [33m9ce9379[m user data modified
+[35m|[m[35m/[m  
+*   [33m86ab740[m Merge branch 'depreciationModified'
+[1;31m|[m[1;32m\[m  
+[1;31m|[m * [33m5fed9db[m depreciation and sub-category medified
+[1;31m|[m[1;31m/[m  
+*   [33meabd79e[m Merge branch 'headerModified'
+[1;33m|[m[1;34m\[m  
+[1;33m|[m * [33mb0aaeda[m header modified
+[1;33m|[m[1;33m/[m  
+*   [33m9d038ec[m Merge branch 'development'
+[1;35m|[m[1;36m\[m  
+[1;35m|[m * [33mb00915c[m rename delete button
+[1;35m|[m[1;35m/[m  
+* [33m4678703[m init

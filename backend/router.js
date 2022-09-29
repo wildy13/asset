@@ -8,7 +8,7 @@ const category = require('./api/utility/category');
 const subcategory = require('./api/utility/subCategory');
 const location = require('./api/utility/location');
 const depreciation = require('./api/utility/depreciation');
-const asset = require('./api/asset')
+const asset = require('./api/asset');
 
 const router = (app) => {
   app.use('/api/auth', auth);
