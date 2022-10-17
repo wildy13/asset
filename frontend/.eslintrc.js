@@ -22,6 +22,7 @@ module.exports = {
     'vue/no-multiple-template-root': 0,
     'vue/no-side-effects-in-computed-properties': 0,
     'eol-last': 0,
-    'no-empty': 0
+    'no-empty': 0,
+    ' vue/valid-v-on': 0
   }
 }
