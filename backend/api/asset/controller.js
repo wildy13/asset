@@ -81,7 +81,7 @@ const inputAssets = async (req, res) => {
     if (id === Assets.id) {
       res.status(400).send(error);
     }
-  } 
+  }
 };
 
 const deleteAssets = async (req, res) => {
