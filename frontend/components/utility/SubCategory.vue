@@ -1,23 +1,26 @@
 <template>
   <el-container>
-    <div>
-      <div class="flex justify-between  mt-2 ml-2">
-        <!-- Add Button -->
-        <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
-          Add SubCategory
-        </el-button>
+    <div class="w-full">
+      <div class="flex justify-between mt-2 w-full">
+        <div class="flex">
+          <!-- Add Button -->
+          <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
+            Add Sub Category
+          </el-button>
 
-        <!-- Delete Button -->
-        <el-button type="danger" icon="el-icon-delete" @click="handleDelete">
-          Delete
-        </el-button>
-
-        <!-- Search -->
-        <el-input
-          v-model="search"
-          class="ml-250  w-1"
-          placeholder="search data in Here"
-        />
+          <!-- Delete Button -->
+          <el-button type="danger" icon="el-icon-delete" @click="handleDelete">
+            Delete
+          </el-button>
+        </div>
+        <div>
+          <!-- Search -->
+          <input
+            v-model="search"
+            class=" placeholder:text-slate-400 bg-white border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-gray-800 focus:ring-1 sm:text-sm "
+            placeholder="search data in Here"
+          />
+        </div>
       </div>
       <div>
         <el-table
@@ -26,7 +29,7 @@
           :total="1000"
           @selection-change="handleSelectionChange"
         >
-          <el-table-column type="selection" width="55" />
+          <el-table-column type="selection" />
           <el-table-column type="index" label="No" />
           <el-table-column label="Category Code" class="table-col">
             <template slot-scope="scope">
@@ -60,7 +63,6 @@
           :page-size="pageSize"
           :pager-count="pagerCount"
           :page-sizes="pageSizes"
-          style="margin-left: 1400px"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
@@ -69,11 +71,10 @@
       <el-dialog
         title="Input Category"
         :visible.sync="dialogVisible"
-        width="30.7%"
       >
         <span>
           <el-form ref="form" :model="form" :rules="rules">
-            <el-form-item label="Asset Category" prop="categoryId" :label-width="formLabelWidth">
+            <el-form-item label="Asset Category" prop="categoryId">
               <el-select v-model="form.categoryId" @change="handleCategoryChange">
                 <el-option
                   v-for="item in selectDataCategory"
@@ -83,7 +84,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Code " prop="categoryCodeId" :label-width="formLabelWidth">
+            <el-form-item label="Code " prop="categoryCodeId">
               <el-select v-model="form.categoryId">
                 <el-option
                   v-for=" item in selectDataCategory"
@@ -93,12 +94,12 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Sub Code" :label-width="formLabelWidth">
+            <el-form-item label="Sub Code">
               <el-input
                 v-model="form.subcategoryCode"
               />
             </el-form-item>
-            <el-form-item label="Sub Name" :label-width="formLabelWidth">
+            <el-form-item label="Sub Name">
               <el-input
                 v-model="form.name"
               />
@@ -115,7 +116,6 @@
       <el-dialog
         title="Input Sub-Category"
         :visible.sync="dialogVisible1"
-        width="30.7%"
       >
         <span>
           <el-form ref="formEdit" :model="formEdit" :rules="rules">
@@ -129,12 +129,12 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Sub Code" :label-width="formLabelWidth">
+            <el-form-item label="Sub Code">
               <el-input
                 v-model="formEdit.subcategoryCode"
               />
             </el-form-item>
-            <el-form-item label="Sub Name" :label-width="formLabelWidth">
+            <el-form-item label="Sub Name">
               <el-input
                 v-model="formEdit.name"
               />
@@ -184,7 +184,6 @@ export default {
       search: '',
       filtered: [],
       multipleSelection: [],
-      formLabelWidth: '150px',
       miniSearch: new MiniSearch({
         idField: ['id'],
         fields: ['name'],

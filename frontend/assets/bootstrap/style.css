@@ -1,23 +1,26 @@
+*{
+    width="100vh"
+}
+
 .bg-img{
     background-image: url('../img/assets.jpg.jpg');
 }
 
-.w-center{
-    margin-left: 37%;
-    align-items: center;
+ .el-menu
+{
+    @apply flex 
+} 
+
+.el-input__inner
+{
+    @apply w-full placeholder:italic placeholder:text-red-400
 }
 
-.input-length{
-    width: 500px;
-}
-.w-5{
-    width: 100px;
+.el-pagination
+{
+    @apply w-full flex justify-end
 }
 
-.w-50{
-    width: 200px;
-}
-
-.ml-500{
-    margin-left: 500px;
+.el-form-item{
+    @apply flex bg-white justify-between rounded-md
 }

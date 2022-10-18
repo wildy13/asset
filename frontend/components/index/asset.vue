@@ -1,32 +1,35 @@
 <template>
   <el-container>
-    <div>
-      <div class="flex justify-between  mt-2 ml-2">
-        <!-- Add Button -->
-        <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
-          Add Asset
-        </el-button>
+    <div class="w-full">
+      <div class="flex justify-between mt-2 w-full">
+        <div class="flex">
+          <!-- Add Button -->
+          <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
+            Add Asset
+          </el-button>
 
-        <!-- Print Button -->
-        <el-button type="primary" icon="el-icon-printer">
-          Print
-        </el-button>
+          <!-- Print Button -->
+          <el-button type="primary" icon="el-icon-printer">
+            Print
+          </el-button>
 
-        <!-- Tag Asset Button -->
-        <el-button type="primary" icon="el-icon-printer">
-          Tag Asset
-        </el-button>
+          <!-- Tag Asset Button -->
+          <el-button type="primary" icon="el-icon-printer">
+            Tag Asset
+          </el-button>
 
-        <!-- Non Tag Button -->
-        <el-button type="primary" icon="el-icon-printer">
-          Non Tag
-        </el-button>
-
-        <!-- Search -->
-        <el-input
-          class="w-1 ml-500"
-          placeholder="search data Data in Here"
-        />
+          <!-- Non Tag Button -->
+          <el-button type="primary" icon="el-icon-printer">
+            Non Tag
+          </el-button>
+        </div>
+        <div>
+          <!-- Search -->
+          <input
+            class=" placeholder:text-slate-400 bg-white border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-gray-800 focus:ring-1 sm:text-sm "
+            placeholder="search data in Here"
+          />
+        </div>
       </div>
 
       <!-- Table -->
@@ -78,6 +81,16 @@
             </template>
           </el-table-column>
         </el-table>
+        <el-pagination
+          layout="total, sizes, prev, pager, next"
+          :current-page="page"
+          :total="assetsData.length"
+          :page-size="pageSize"
+          :pager-count="pagerCount"
+          :page-sizes="pageSizes"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+        />
       </div>
 
       <!-- add Dialog -->
@@ -303,7 +316,12 @@ export default {
       year: [''],
       type: [''],
       /* end of array */
-
+      page: 1,
+      pageSize: 5,
+      pagerCount: 5,
+      pageSizes: [5, 10, 20, 50],
+      search: '',
+      filtered: [],
       miniSearch: new MiniSearch({
         idField: ['id'],
         fields: ['name'],
@@ -414,8 +432,14 @@ export default {
       selectDataDapartment: ['dapartment/getDapartments'],
       selectDataCurrency: ['currency/getCurrency'],
       depreciationData: ['depreciation/getDepreciation'],
-      pageTableData: ['assets/getAssets']
-    })
+      assetsData: ['assets/getAssets']
+    }),
+    pageTableData () {
+      if (this.search) {
+        return this.miniSearch.search(this.search, { prefix: true }).slice(0, this.pageSize)
+      }
+      return this.assetsData.slice(this.pageSize * this.page - this.pageSize, this.pageSize * this.page)
+    }
   },
 
   async created () {
@@ -495,6 +519,13 @@ export default {
     async handleDapartementChange (id) {
       await this.fetchSection({ id })
     },
+    handleSizeChange (val) {
+      this.pageSize = val
+    },
+    handleCurrentChange (val) {
+      this.page = val
+    },
+
     async handleSubCategoryChange (id) {
       await this.filterDepreciation({ id })
       this.formChange = { ...this.depreciationData }
