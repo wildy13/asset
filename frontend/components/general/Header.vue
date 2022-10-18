@@ -1,6 +1,6 @@
 <template>
-  <div class="flex-1 w-100% bg-slate-600">
-    <div class="flex justify-between bg-red">
+  <el-header class="flex-1 w-100% bg-transparent">
+    <div class="flex justify-between ...">
       <div>
         <img
           src="../../assets/img/labtechLogo.png"
@@ -12,5 +12,5 @@
         ASSETS DATA SYSTEM
       </div>
     </div>
-  </div>
+  </el-header>
 </template>

@@ -94,7 +94,7 @@
     <el-menu-item index="change-password">
       Change Password
     </el-menu-item>
-    <div class="flex w-full justify-end">
+    <div class="flex w-full justify-end xl:w-0 xl:ml-[580px]">
       <div>
         <el-menu-item>
           logged in as {{ $auth.user.username }}
