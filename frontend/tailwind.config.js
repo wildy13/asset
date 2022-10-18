@@ -8,15 +8,7 @@ module.exports = {
     './nuxt.config.{js,ts}'
   ],
   theme: {
-    extend: {
-      margin: {
-        '1000px': '1000px',
-        '970px': '970px',
-        '120px': '120px',
-        '500px': '500px',
-        '600px': '600px'
-      }
-    }
+    extend: {}
   },
   variants: {
     extend: {
