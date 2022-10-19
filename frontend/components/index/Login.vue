@@ -1,21 +1,7 @@
 <template>
-  <div class="min-h-screen grid grid-cols-3 bg-img">
-    <div></div>
-    <div class="grid grid-cols-1 content-center lg:px-18 xl:px-32 2xl:px-30">
-      <div class="text-3xl font-bold text-center text-blue-600">
-        Asset Data System
-      </div>
-
-      <div class="grid grid-cols-1 gap-y-2 my-8 text-black-500 text-center">
-        <div>Please login with your credentials</div>
-      </div>
-
-      <IndexErrorHandler
-        v-if="error"
-        :error="error"
-      />
-
-      <div>
+  <div class="flex bg-slate-600 bg-blend-multiply  min-h-screen justify-center items-center">
+    <div class=" grid grid-cols-2 w-1/2 justify-center items-center rounded-md shadow-2xl h-96">
+      <div class="h-full bg-slate-200 justify-center items-center flex">
         <el-form
           ref="form"
           :model="form"
@@ -26,32 +12,29 @@
         >
           <div class="floating-input mb-5 relative">
             <el-form-item prop="username">
-              <el-input v-model="form.username" size="large" placeholder="Username"></el-input>
+              <input v-model="form.username" size="large" placeholder="Username" class="placeholder:text-slate-400 text-center bg-white border-slate-400 rounded-md  pl-9 pr-3 shadow-sm" />
             </el-form-item>
           </div>
           <div class="floating-input mb-5 relative">
             <el-form-item prop="password">
-              <el-input
+              <input
                 v-model="form.password"
                 size="large"
-                show-password
+                type="password"
                 placeholder="Password"
-              ></el-input>
+                class="placeholder:text-slate-400 text-center bg-white border-slate-400 rounded-md  pl-9 pr-3 shadow-sm"
+              />
             </el-form-item>
           </div>
-          <el-form-item>
-            <el-button type="primary" size="large" native-type="submit" class="w-full">
-              Login
-            </el-button>
-          </el-form-item>
+          <div class="bg-slate-900 flex justify-center pl-9 pr-3 rounded-md">
+            <button type="primary" native-type="submit" class="justify-center text-white font-serif">
+              Log in
+            </button>
+          </div>
         </el-form>
       </div>
-
-      <div class="flex justify-center space-x-2">
-        <div class="text-white">
-          Version
-          <a href="" class="font-bold text-blue-600">1.0.0</a>
-        </div>
+      <div class="h-full">
+        <img src="../../assets/img/assets.jpg" alt="" class="h-full">
       </div>
     </div>
   </div>

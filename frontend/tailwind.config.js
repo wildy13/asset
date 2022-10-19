@@ -11,6 +11,7 @@ module.exports = {
     extend: {
       margin: {
         '580px': '580px',
+        '650px': '650px',
         '100%': '100%'
       }
     }
