@@ -4,7 +4,7 @@
 
  .el-menu
 {
-    @apply flex 
+    @apply flex w-full
 } 
 
 .el-input__inner
@@ -19,4 +19,14 @@
 
 .el-form-item{
     @apply flex bg-white justify-between rounded-md
+}
+
+.el-form-item__label
+{
+    @apply mr-1
+}
+
+.el-dialog
+{
+    @apply w-max
 }

@@ -2,7 +2,7 @@
   <el-container>
     <div class="w-full">
       <div class="flex justify-between mt-2 w-full">
-        <div class="flex">
+        <div>
           <!-- Add Button -->
           <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
             Add Asset
@@ -104,24 +104,185 @@
             label-position="top"
             @submit.native.prevent="submitForm('form')"
           >
-            <div class="flex flex-wrap -mx-2 mb-2">
+            <div class="grid grid-cols-2">
+              <div>
+                <div class="justify-start flex">
+                  <el-form-item label="Assets For">
+                    <div>
+                      <div>
+                        <el-radio v-model="radio" label="1">Tax Assets</el-radio>
+                        <el-radio v-model="radio" label="2">Non Tax Assets</el-radio>
+                      </div>
+                    </div>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Asset Name" prop="name">
+                    <el-input v-model="form.name" />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Brand & Model" prop="brandModel">
+                    <el-input v-model="form.brandModel" type="textarea" :rows="2" placeholder="Please input Brand & Model" />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Asset Category" prop="categoryId">
+                    <el-select v-model="form.categoryId" @change="handleCategoryChange">
+                      <el-option
+                        v-for="item in selectDataCategory"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Sub Category " prop="subcategoryId">
+                    <el-select v-model="form.subcategoryId" @change="handleSubCategoryChange">
+                      <el-option
+                        v-for=" item in selectDataSubCategory"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Condition " prop="condition">
+                    <el-select v-model="form.condition">
+                      <el-option
+                        v-for="item in condition"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Status " prop="status">
+                    <el-select v-model="form.status">
+                      <el-option
+                        v-for="item in status"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Dapartment" prop="dapartmentId">
+                    <el-select v-model="form.dapartmentId" @change="handleDapartementChange">
+                      <el-option
+                        v-for="item in selectDataDapartment"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Section" prop="sectionId">
+                    <el-select v-model="form.sectionId">
+                      <el-option
+                        v-for="item in selectDataSection"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="PO No" prop="po">
+                    <el-input v-model="form.po" />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Acquired Date" prop="date">
+                    <el-input v-model="form.date" type="date" />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="qty" prop="qty">
+                    <el-input v-model="form.qty" />
+                  </el-form-item>
+                </div>
+              </div>
+              <div>
+                <div class="flex justify-start">
+                  <el-form-item label="Purchase Price" prop="currencyId">
+                    <div class="flex">
+                      <el-select v-model="form.currencyId" style="width: 20%">
+                        <el-option
+                          v-for="item in selectDataCurrency"
+                          :key="item.id"
+                          :label="item.name"
+                          :value="item.id"
+                        />
+                      </el-select>
+                      <el-input v-model="form.price" />
+                    </div>
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Exchange Rate to USD" prop="exchange">
+                    <el-input v-model="form.exchange" placeholder="Input 1 For USD Currency" />
+                  </el-form-item>
+                </div>
+                <b>B. Depreciation</b>
+                <div class="flex justify-start">
+                  <el-form-item label="Asset Non Depreciation" property="nonDepreciation">
+                    <el-checkbox v-model="checked" disabled />
+                  </el-form-item>
+                </div>
+                <div>*This field will be checked if the category of asset didn't have</div>
+                <div>depreciation.</div>
+                <div class="flex justify-start">
+                  <el-form-item label="Group of asset" prop="type">
+                    <el-input v-model="formChange.type" disabled />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Methode" prop="method">
+                    <el-input v-model="formChange.method" disabled />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Rates" prop="rate">
+                    <el-input v-model="formChange.rate" disabled />
+                  </el-form-item>
+                </div>
+                <div class="flex justify-start">
+                  <el-form-item label="Life" prop="year">
+                    <el-input v-model="formChange.year" disabled />
+                  </el-form-item>
+                </div>
+              </div>
+            </div>
+            <!--             <div class="flex flex-wrap -mx-2 mb-2">
               <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
                 <el-form-item label="Asset For" class=" flex">
-                  <div class="ml-5">
-                    <el-radio v-model="radio" label="1" class="block">Tax Assets</el-radio>
+                  <div>
+                    <el-radio v-model="radio" label="1" >Tax Assets</el-radio>
                   </div>
-                  <div class="ml-5">
-                    <el-radio v-model="radio" label="2" class="block">Non Tax Assets</el-radio>
+                  <div>
+                    <el-radio v-model="radio" label="2" >Non Tax Assets</el-radio>
                   </div>
                 </el-form-item>
-                <el-form-item label="Asset Name" prop="name" class="flex">
-                  <el-input v-model="form.name" class="block ml-2 " />
+                <el-form-item label="Asset Name" prop="name">
+                  <el-input v-model="form.name" />
                 </el-form-item>
-                <el-form-item label="Brand & Model" prop="brandModel" class="flex">
-                  <el-input v-model="form.brandModel" type="textarea" :rows="2" placeholder="Please input Brand & Model" class="block ml-2" />
+                <el-form-item label="Brand & Model" prop="brandModel">
+                  <el-input v-model="form.brandModel" type="textarea" :rows="2" placeholder="Please input Brand & Model"  />
                 </el-form-item>
-                <el-form-item label="Asset Category" prop="categoryId" class="flex">
-                  <el-select v-model="form.categoryId" class="block ml-2" @change="handleCategoryChange">
+                <el-form-item label="Asset Category" prop="categoryId">
+                  <el-select v-model="form.categoryId"  @change="handleCategoryChange">
                     <el-option
                       v-for="item in selectDataCategory"
                       :key="item.id"
@@ -130,8 +291,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Sub Category " prop="subcategoryId" class="flex">
-                  <el-select v-model="form.subcategoryId" class="block ml-2" @change="handleSubCategoryChange">
+                <el-form-item label="Sub Category " prop="subcategoryId">
+                  <el-select v-model="form.subcategoryId"  @change="handleSubCategoryChange">
                     <el-option
                       v-for=" item in selectDataSubCategory"
                       :key="item.id"
@@ -140,8 +301,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Condition " prop="condition" class="flex">
-                  <el-select v-model="form.condition" class="block ml-2">
+                <el-form-item label="Condition " prop="condition">
+                  <el-select v-model="form.condition" >
                     <el-option
                       v-for="item in condition"
                       :key="item.value"
@@ -150,8 +311,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Status " prop="status" class="flex">
-                  <el-select v-model="form.status" class="block ml-2">
+                <el-form-item label="Status " prop="status">
+                  <el-select v-model="form.status" >
                     <el-option
                       v-for="item in status"
                       :key="item.value"
@@ -160,8 +321,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Dapartment" prop="dapartmentId" class="flex">
-                  <el-select v-model="form.dapartmentId" class="block ml-2" @change="handleDapartementChange">
+                <el-form-item label="Dapartment" prop="dapartmentId">
+                  <el-select v-model="form.dapartmentId"  @change="handleDapartementChange">
                     <el-option
                       v-for="item in selectDataDapartment"
                       :key="item.id"
@@ -170,8 +331,8 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="Section" prop="sectionId" class="flex">
-                  <el-select v-model="form.sectionId" class="block ml-2">
+                <el-form-item label="Section" prop="sectionId">
+                  <el-select v-model="form.sectionId" >
                     <el-option
                       v-for="item in selectDataSection"
                       :key="item.id"
@@ -180,19 +341,19 @@
                     />
                   </el-select>
                 </el-form-item>
-                <el-form-item label="PO No" prop="po" class="flex">
-                  <el-input v-model="form.po" class="block ml-2 " />
+                <el-form-item label="PO No" prop="po">
+                  <el-input v-model="form.po" />
                 </el-form-item>
-                <el-form-item label="Acquired Date" prop="date" class="flex">
-                  <el-input v-model="form.date" type="date" class="block ml-2 " />
+                <el-form-item label="Acquired Date" prop="date">
+                  <el-input v-model="form.date" type="date" />
                 </el-form-item>
-                <el-form-item label="qty" prop="qty" class="flex">
-                  <el-input v-model="form.qty" class="block ml-2 w-5" />
+                <el-form-item label="qty" prop="qty">
+                  <el-input v-model="form.qty" />
                 </el-form-item>
               </div>
               <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Purchase Price" prop="currencyId" class="flex">
-                  <el-select v-model="form.currencyId" class="block ml-2 w-5">
+                <el-form-item label="Purchase Price" prop="currencyId">
+                  <el-select v-model="form.currencyId">
                     <el-option
                       v-for="item in selectDataCurrency"
                       :key="item.id"
@@ -200,31 +361,31 @@
                       :value="item.id"
                     />
                   </el-select>
-                  <el-input v-model="form.price" class="block ml-2 w-50" />
+                  <el-input v-model="form.price"/>
                 </el-form-item>
-                <el-form-item label="Exchange Rate to USD" prop="exchange" class="flex">
-                  <el-input v-model="form.exchange" class="block ml-2" placeholder="Input 1 For USD Currency" />
+                <el-form-item label="Exchange Rate to USD" prop="exchange">
+                  <el-input v-model="form.exchange"  placeholder="Input 1 For USD Currency" />
                 </el-form-item>
                 <b>B. Depreciation</b>
-                <el-form-item label="Asset Non Depreciation" property="nonDepreciation" class="flex">
-                  <el-checkbox v-model="checked" class="block ml-2" disabled />
+                <el-form-item label="Asset Non Depreciation" property="nonDepreciation">
+                  <el-checkbox v-model="checked"  disabled />
                 </el-form-item>
                 <div>*This field will be checked if the category of asset didn't have</div>
                 <div>depreciation.</div>
-                <el-form-item label="Group of asset" prop="type" class="flex">
-                  <el-input v-model="formChange.type" class="block ml-2" disabled />
+                <el-form-item label="Group of asset" prop="type">
+                  <el-input v-model="formChange.type"  disabled />
                 </el-form-item>
-                <el-form-item label="Methode" prop="method" class="flex">
-                  <el-input v-model="formChange.method" class="block ml-2" disabled />
+                <el-form-item label="Methode" prop="method">
+                  <el-input v-model="formChange.method"  disabled />
                 </el-form-item>
-                <el-form-item label="Rates" prop="rate" class="flex">
-                  <el-input v-model="formChange.rate" class="block ml-2" disabled />
+                <el-form-item label="Rates" prop="rate">
+                  <el-input v-model="formChange.rate"  disabled />
                 </el-form-item>
-                <el-form-item label="Life" prop="year" class="flex">
-                  <el-input v-model="formChange.year" class="block ml-2" disabled />
+                <el-form-item label="Life" prop="year">
+                  <el-input v-model="formChange.year"  disabled />
                 </el-form-item>
               </div>
-            </div>
+            </div> -->
           </el-form>
         </span>
         <span slot="footer" class="dialog-footer">

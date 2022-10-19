@@ -1,16 +1,10 @@
 <template>
-  <el-header class="flex-1 w-100% bg-transparent">
-    <div class="flex justify-between ...">
-      <div>
-        <img
-          src="../../assets/img/labtechLogo.png"
-          alt="labtechLogo.png"
-          class="flex-1 w-25 block"
-        />
-      </div>
-      <div class="flex-1 text-center text-3xl mt-2 font-light">
-        ASSETS DATA SYSTEM
+  <div class="w-full">
+    <div class="flex bg-slate-600">
+      <div><img src="../../assets/img/labtechLogo.png" alt="labtechLogo.png" class="w-32" /></div>
+      <div class="font-serif italic flex items-center w-full justify-center text-4xl xl:bg-red">
+        Asset Data System
       </div>
     </div>
-  </el-header>
+  </div>
 </template>
