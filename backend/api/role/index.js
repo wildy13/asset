@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { isAdmin, isAuthenticated } = require('../auth/service');
+const { isAdmin } = require('../auth/service');
 const {
   getRole, inputRole, deleteRoles, editRoles,
 } = require('./controller');
@@ -7,10 +7,10 @@ const {
 const router = new Router();
 
 // Get Router
-router.get('/', isAuthenticated(), getRole);
+router.get('/', isAdmin(), getRole);
 
 // POST Router
-router.post('/', inputRole);
+router.post('/', isAdmin(), inputRole);
 router.post('/delete', isAdmin(), deleteRoles);
 
 // PUT Router

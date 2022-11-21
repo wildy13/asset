@@ -28,12 +28,12 @@ const signToken = (
   username,
   roleId,
   email,
-  dapartement,
-  section,
+  dapartementId,
+  sectionId,
   employeeNo,
 ) => jwt.sign(
   {
-    id, username, roleId, email, dapartement, section, employeeNo,
+    id, username, roleId, email, dapartementId, sectionId, employeeNo,
   },
   secret.session,
   {
@@ -51,8 +51,8 @@ const isAuthenticated = () => async (req, res, next) => {
         'username',
         'roleId',
         'email',
-        'dapartement',
-        'section',
+        'dapartementId',
+        'sectionId',
         'employeeNo',
       ],
       where: { username: req.auth.username },
@@ -79,7 +79,7 @@ const hasRole = (roleId) => async (req, res, next) => {
 const isAdmin = () => async (req, res, next) => {
   if (!req.auth) {
     res.status(401).json('Access Denied / Forbidden');
-  } else if (req.auth.roleId === 2) {
+  } else if (req.auth.roleId === 1) {
     next();
   } else {
     res.status(401).json('Access Denied / Forbidden');

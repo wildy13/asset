@@ -12,9 +12,23 @@ const authLocal = async (req, res) => new Promise((resolve, reject) => {
     }
 
     const {
-      id, username, roleId, email, dapartement, section, employeeNo,
+      id,
+      username,
+      roleId,
+      email,
+      dapartementId,
+      sectionId,
+      employeeNo,
     } = user;
-    const token = await signToken(id, username, roleId, email, dapartement, section, employeeNo);
+    const token = await signToken(
+      id,
+      username,
+      roleId,
+      email,
+      dapartementId,
+      sectionId,
+      employeeNo,
+    );
 
     resolve({ token });
   })(req, res);

@@ -10,6 +10,16 @@
           label-position="top"
           @submit.native.prevent="submitForm('form')"
         >
+          <div class="text-center mb-4 font-sans">
+            <div class="text-xl border-b-2 border-slate-600">
+              Asset System
+            </div>
+            <div class="text-lg">
+              <div>
+                <span>Login</span>
+              </div>
+            </div>
+          </div>
           <div class="floating-input mb-5 relative">
             <el-form-item prop="username">
               <input v-model="form.username" size="large" placeholder="Username" class="placeholder:text-slate-400 text-center bg-white border-slate-400 rounded-md  pl-9 pr-3 shadow-sm" />

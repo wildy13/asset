@@ -9,7 +9,7 @@
           <el-input v-model="form.newPass" show-password />
         </el-form-item>
         <el-form-item label="Confirm New Password" prop="password">
-          <el-input v-model="form.confirmPass" show-password />
+          <el-input v-model="form.confNewPass" show-password />
         </el-form-item>
         <el-button type="primary" native-type="submit">
           save
@@ -26,7 +26,9 @@ export default {
   data () {
     return {
       form: {
-        oldPass: ''
+        oldPass: '',
+        newPass: '',
+        confNewPass: ''
       },
       rules: {
         oldPass: [
@@ -59,7 +61,7 @@ export default {
     changePassword () {
       try {
         this.changePassword({
-          password: this.form.oldPass
+          password: this.form.newPass
         })
       } catch (error) {
         if (error.response) {

@@ -22,7 +22,7 @@ const connect = async () => {
 const start = async () => {
   try {
     router(app);
-    // Assets.sync({ force:true })       // <------Force Model to database
+    // sequelize.sync({ force: true }); // <------Force Model to database
     app.listen({ port, host }, () => console.log(`Server running on port ${port}`));
     await connect();
   } catch (err) {

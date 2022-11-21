@@ -4,7 +4,11 @@
       <div class="flex justify-between mt-2 w-full">
         <div class="flex">
           <!-- Add Button -->
-          <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
+          <el-button
+            type="primary"
+            icon="el-icon-circle-plus-outline"
+            @click="dialogVisible = true"
+          >
             Add User
           </el-button>
 
@@ -13,15 +17,17 @@
             Delete
           </el-button>
         </div>
+
+        <!-- Search -->
         <div>
-          <!-- Search -->
           <input
             v-model="search"
-            class=" placeholder:text-slate-400 bg-white border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-gray-800 focus:ring-1 sm:text-sm "
+            class="placeholder:text-slate-400 bg-white border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-sky-500 focus:ring-gray-800 focus:ring-1 sm:text-sm"
             placeholder="search data in Here"
           />
         </div>
       </div>
+
       <!-- Table  -->
       <div>
         <el-table
@@ -34,32 +40,29 @@
         >
           <el-table-column type="selection" />
           <el-table-column type="index" label="No" class="table-col" />l
-          <el-table-column
-            prop="employeeNo"
-            label="Employee Number"
-          />
+          <el-table-column prop="employeeNo" label="Employee Number" />
           <el-table-column prop="username" label="Name" />
           <el-table-column prop="email" label="Email" class="table-col" />
           <el-table-column label="Dapartment" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? dapartement[scope.row.dapartement] : 'error' }}
+              {{ scope.row ? dapartementId[scope.row.dapartementId] : "error" }}
             </template>
           </el-table-column>
           <el-table-column label="Section" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? section[scope.row.section] : 'error' }}
+              {{ scope.row ? sectionId[scope.row.sectionId] : "error" }}
             </template>
           </el-table-column>
           <el-table-column label="Role" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? roles[scope.row.roleId] : 'error' }}
+              {{ scope.row ? roles[scope.row.roleId] : "error" }}
             </template>
           </el-table-column>
           <el-table-column align="right">
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.row), dialogVisible1 =true"
+                @click="handleEdit(scope.row), (dialogVisible1 = true)"
               >
                 Edit
               </el-button>
@@ -80,94 +83,131 @@
           @current-change="handleCurrentChange"
         />
       </div>
+
       <!-- Add User Dialog -->
-      <el-dialog title="Input user" :visible.sync="dialogVisible">
-        <span>
-          <el-form
-            ref="form"
-            :model="form"
-            :rules="rules"
-            :hide-required-asterisk="true"
-            label-position="top"
-            @submit.native.prevent="submitForm('form')"
-          >
-            <el-form-item label="Username" prop="username">
-              <el-input v-model="form.username" label="Username" />
-            </el-form-item>
-            <div class="flex flex-wrap -mx-2 mb-2">
-              <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Password" prop="password">
-                  <el-input v-model="form.password" show-password />
-                </el-form-item>
-              </div>
-              <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Confirm Password" prop="confirmPassword">
-                  <el-input v-model="form.confirmPassword" show-password />
-                </el-form-item>
-              </div>
-            </div>
-            <el-form-item label="Email" prop="email">
-              <el-input v-model="form.email"></el-input>
-            </el-form-item>
-            <div class="flex flex-wrap -mx-2 mb-2">
-              <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Dapartment" prop="dapartment">
-                  <el-select v-model="form.dapartement" @change="handleDapartementChange">
-                    <el-option
-                      v-for="item in selectDataDapartment"
-                      :key="item.id"
-                      :label="item.name"
-                      :value="item.id"
+      <div class="grid grid-cols-1">
+        <el-dialog title="Input user" :visible.sync="dialogVisible">
+          <span class="col-start-1">
+            <el-form
+              ref="form"
+              :model="form"
+              :rules="rules"
+              :hide-required-asterisk="true"
+              label-position="top"
+              @submit.native.prevent="submitForm('form')"
+            >
+              <div class="flex">
+                <div>
+                  <el-form-item prop="username">
+                    <el-input
+                      v-model="form.username"
+                      label="Username"
+                      placeholder="Username"
                     />
-                  </el-select>
-                </el-form-item>
+                  </el-form-item>
+                </div>
+                <div class="mx-2">
+                  <el-form-item prop="email">
+                    <el-input v-model="form.email" placeholder="Email" />
+                  </el-form-item>
+                </div>
               </div>
-              <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Section" prop="section">
-                  <el-select v-model="form.section">
-                    <el-option
-                      v-for="item in selectDataSection"
-                      :key="item.id"
-                      :label="item.name"
-                      :value="item.id"
+              <div class="flex">
+                <div>
+                  <el-form-item prop="password">
+                    <el-input
+                      v-model="form.password"
+                      show-password
+                      placeholder="Password"
                     />
-                  </el-select>
-                </el-form-item>
-              </div>
-            </div>
-            <div class="flex flex-wrap -mx-3 mb-2">
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <el-form-item label="Role" prop="roleId">
-                  <el-select v-model="form.roleId">
-                    <el-option
-                      v-for="item in selectDataRole"
-                      :key="item.id"
-                      :label="item.name"
-                      :value="item.id"
+                  </el-form-item>
+                </div>
+                <div class="mx-2">
+                  <el-form-item prop="confirmPassword">
+                    <el-input
+                      v-model="form.confirmPassword"
+                      show-password
+                      placeholder="Confirm Password"
                     />
-                  </el-select>
-                </el-form-item>
+                  </el-form-item>
+                </div>
               </div>
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <el-form-item label="Employee No" prop="employeeNo">
-                  <el-input v-model="form.employeeNo" />
-                </el-form-item>
+              <div class="flex justify-between">
+                <div>
+                  <el-form-item prop="dapartmentId">
+                    <el-select
+                      v-model="form.dapartementId"
+                      placeholder="Dapartement"
+                      @change="handleDapartementChange"
+                    >
+                      <el-option
+                        v-for="item in selectDataDapartment"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+                <div>
+                  <el-form-item prop="sectionId">
+                    <el-select
+                      v-model="form.sectionId"
+                      placeholder="Section"
+                      class="mx-2"
+                    >
+                      <el-option
+                        v-for="item in selectDataSection"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
               </div>
-            </div>
-            <div class="mt-12">
-              <el-button
-                type="primary"
-                native-type="submit"
-                :loading="loading"
-                class="w-full"
-              >
-                Save
-              </el-button>
-            </div>
-          </el-form>
-        </span>
-      </el-dialog>
+              <div class="flex">
+                <div>
+                  <el-form-item prop="employeeNo">
+                    <el-input
+                      v-model="form.employeeNo"
+                      placeholder="Employee No"
+                    />
+                  </el-form-item>
+                </div>
+                <div class="mx-2">
+                  <el-form-item prop="roleId">
+                    <el-select
+                      v-model="form.roleId"
+                      placeholder="Role"
+                      class="mx-2"
+                    >
+                      <el-option
+                        v-for="item in selectDataRole"
+                        :key="item.id"
+                        :label="item.name"
+                        :value="item.id"
+                      />
+                    </el-select>
+                  </el-form-item>
+                </div>
+              </div>
+              <div class="mt-12">
+                <el-button
+                  type="primary"
+                  native-type="submit"
+                  :loading="loading"
+                  class="w-full"
+                >
+                  Save
+                </el-button>
+              </div>
+            </el-form>
+          </span>
+        </el-dialog>
+      </div>
       <!-- end of Add Dialog -->
+
       <!-- Edit User Dialog -->
       <el-dialog title="Input user" :visible.sync="dialogVisible1">
         <span>
@@ -179,30 +219,32 @@
             label-position="top"
             @submit.native.prevent="editForm()"
           >
-            <el-form-item label="Username" prop="username">
-              <el-input v-model="formEdit.username" label="Username" />
-            </el-form-item>
-            <el-form-item label="Email" prop="email">
-              <el-input v-model="formEdit.email"></el-input>
-            </el-form-item>
-            <div class="flex flex-wrap -mx-2 mb-2">
-              <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Dapartement  " prop="dapartement">
-                  <el-input v-model="formEdit.dapartement" />
+            <div class="flex">
+              <div>
+                <el-form-item prop="username">
+                  <el-input
+                    v-model="formEdit.username"
+                    label="Username"
+                    placeholder="Username"
+                  />
                 </el-form-item>
               </div>
-              <div class="w-full md:w-1/2 px-2 mb-6 md:mb-0">
-                <el-form-item label="Section" prop="section">
-                  <el-input v-model="formEdit.section" />
+              <div class="mx-2">
+                <el-form-item prop="email">
+                  <el-input v-model="formEdit.email" placeholder="Email" />
                 </el-form-item>
               </div>
             </div>
-            <div class="flex flex-wrap -mx-3 mb-2">
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <el-form-item label="Role" prop="roleId">
-                  <el-select v-model="formEdit.roleId">
+            <div class="flex justify-between">
+              <div>
+                <el-form-item prop="dapartmentId">
+                  <el-select
+                    v-model="formEdit.dapartementId"
+                    placeholder="Dapartement"
+                    @change="handleDapartementChange"
+                  >
                     <el-option
-                      v-for="item in selectDataRole"
+                      v-for="item in selectDataDapartment"
                       :key="item.id"
                       :label="item.name"
                       :value="item.id"
@@ -210,9 +252,46 @@
                   </el-select>
                 </el-form-item>
               </div>
-              <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                <el-form-item label="Employee No" prop="employeeNo">
-                  <el-input v-model="formEdit.employeeNo" />
+              <div>
+                <el-form-item prop="sectionId">
+                  <el-select
+                    v-model="formEdit.sectionId"
+                    placeholder="Section"
+                    class="mx-2"
+                  >
+                    <el-option
+                      v-for="item in selectDataSection"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.id"
+                    />
+                  </el-select>
+                </el-form-item>
+              </div>
+            </div>
+            <div class="flex">
+              <div>
+                <el-form-item prop="employeeNo">
+                  <el-input
+                    v-model="formEdit.employeeNo"
+                    placeholder="Employee No"
+                  />
+                </el-form-item>
+              </div>
+              <div class="mx-2">
+                <el-form-item prop="roleId">
+                  <el-select
+                    v-model="formEdit.roleId"
+                    placeholder="Role"
+                    class="mx-2"
+                  >
+                    <el-option
+                      v-for="item in selectDataRole"
+                      :key="item.id"
+                      :label="item.name"
+                      :value="item.id"
+                    />
+                  </el-select>
                 </el-form-item>
               </div>
             </div>
@@ -256,16 +335,16 @@ export default {
         username: '',
         employeeNo: '',
         email: '',
-        dapartement: '',
-        section: '',
+        dapartementId: '',
+        sectionId: '',
         password: '',
-        confPassword: '',
+        confirmPassword: '',
         roleId: ''
       },
       activeIndex: 'ManagementUser',
       roles: [''],
-      dapartement: [''],
-      section: [''],
+      dapartementId: [''],
+      sectionId: [''],
       page: 1,
       pageSize: 5,
       pagerCount: 5,
@@ -276,7 +355,14 @@ export default {
       miniSearch: new MiniSearch({
         idField: ['id'],
         fields: ['username', 'employeeNo', 'dapartement'],
-        storeFields: ['username', 'employeeNo', 'email', 'dapartement', 'section', 'roleId']
+        storeFields: [
+          'username',
+          'employeeNo',
+          'email',
+          'dapartementId',
+          'sectionId',
+          'roleId'
+        ]
       }),
       rules: {
         username: [
@@ -307,14 +393,14 @@ export default {
             trigger: 'blur'
           }
         ],
-        section: [
+        sectionId: [
           {
             required: true,
             message: 'This field is required',
             trigger: 'blur'
           }
         ],
-        dapartement: [
+        dapartementId: [
           {
             required: true,
             message: 'This field is required',
@@ -337,10 +423,8 @@ export default {
         username: '',
         employeeNo: '',
         email: '',
-        dapartement: '',
-        section: '',
-        password: '',
-        confPassword: '',
+        dapartementId: '',
+        sectionId: '',
         roleId: ''
       }
     }
@@ -358,9 +442,14 @@ export default {
     }),
     pageTableData () {
       if (this.search) {
-        return this.miniSearch.search(this.search, { prefix: true }).slice(0, this.pageSize)
+        return this.miniSearch
+          .search(this.search, { prefix: true })
+          .slice(0, this.pageSize)
       }
-      return this.usersData.slice(this.pageSize * this.page - this.pageSize, this.pageSize * this.page)
+      return this.usersData.slice(
+        this.pageSize * this.page - this.pageSize,
+        this.pageSize * this.page
+      )
     }
   },
 
@@ -373,8 +462,12 @@ export default {
         await this.fetchDapartment()
         await this.getSection()
         this.roles.push(...this.selectDataRole.map(value => value.name))
-        this.dapartement.push(...this.selectDataDapartment.map(value => value.name))
-        this.section.push(...this.selectDataSection.map(value => value.name))
+        this.dapartementId.push(
+          ...this.selectDataDapartment.map(value => value.name)
+        )
+        this.sectionId.push(
+          ...this.selectDataSection.map(value => value.name)
+        )
       } catch (error) {
         this.$message({
           title: 'error',
@@ -386,7 +479,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('users', ['fetchUsers', 'createUser', 'fetchDel', 'fetchEdit']),
+    ...mapActions('users', [
+      'fetchUsers',
+      'createUser',
+      'fetchDel',
+      'fetchEdit'
+    ]),
     ...mapActions('roles', ['fetchRoles']),
     ...mapActions('dapartment', ['fetchDapartment']),
     ...mapActions('section', ['fetchSection', 'getSection']),
@@ -412,7 +510,8 @@ export default {
           this.fetchDel(this.multipleSelection)
           this.$message({
             type: 'info',
-            message: 'Changes saved. Proceeding to a new route, Please refresh browser for New Data.'
+            message:
+              'Changes saved. Proceeding to a new route, Please refresh browser for New Data.'
           })
         })
         .catch((action) => {
@@ -457,8 +556,8 @@ export default {
           id: this.formEdit.id,
           username: this.formEdit.username,
           email: this.formEdit.email,
-          section: this.formEdit.section,
-          dapartement: this.formEdit.dapartement,
+          sectionId: this.formEdit.sectionId,
+          dapartementId: this.formEdit.dapartementId,
           roleId: this.formEdit.roleId,
           employeeNo: this.formEdit.employeeNo
         })

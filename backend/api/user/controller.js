@@ -8,8 +8,8 @@ const getUser = async (req, res) => {
         'employeeNo',
         'username',
         'email',
-        'dapartement',
-        'section',
+        'dapartementId',
+        'sectionId',
         'roleId',
       ],
     });
@@ -27,8 +27,8 @@ const getMe = async (req, res) => {
         'employeeNo',
         'username',
         'email',
-        'dapartement',
-        'section',
+        'dapartementId',
+        'sectionId',
         'roleId',
       ],
       where: { username: req.auth.username },
@@ -44,8 +44,8 @@ const createUser = async (req, res) => {
     employeeNo,
     username,
     email,
-    dapartement,
-    section,
+    dapartementId,
+    sectionId,
     password,
     confPassword,
     roleId,
@@ -55,8 +55,8 @@ const createUser = async (req, res) => {
       employeeNo,
       username,
       email,
-      dapartement,
-      section,
+      dapartementId,
+      sectionId,
       password,
       confPassword,
       roleId,
@@ -91,8 +91,8 @@ const editUsers = async (req, res) => {
       'employeeNo',
       'username',
       'email',
-      'dapartement',
-      'section',
+      'dapartementId',
+      'sectionId',
       'roleId',
     ],
     where: {
@@ -102,15 +102,15 @@ const editUsers = async (req, res) => {
   user.username = req.body.username;
   user.employeeNo = req.body.employeeNo;
   user.email = req.body.email;
-  user.section = req.body.section;
-  user.dapartement = req.body.dapartement;
+  user.sectionId = req.body.sectionId;
+  user.dapartementId = req.body.dapartementId;
   user.roleId = req.body.roleId;
 
   const save = await user.save();
   res.status(200).json(save);
 };
 
-/* const changePassword = async (req, res) => {
+const changePassword = async (req) => {
   const user = await User.findOne({
     attributes: [
       'id',
@@ -121,7 +121,12 @@ const editUsers = async (req, res) => {
     },
   });
   console.log(user);
-}; */
+};
 module.exports = {
-  getUser, getMe, createUser, deleteUsers, editUsers,
+  getUser,
+  getMe,
+  createUser,
+  deleteUsers,
+  editUsers,
+  changePassword,
 };

@@ -12,7 +12,7 @@ router.get('/', isAdmin(), getSection);
 // POST Router
 router.post('/', isAdmin(), inputSection);
 router.post('/delete', isAdmin(), deleteSection);
-router.post('/filter', isAdmin(), filterSection);
+router.post('/filter', filterSection);
 
 // PUT Router
 router.put('/:id', isAdmin(), editSection);
