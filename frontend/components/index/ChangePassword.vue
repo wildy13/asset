@@ -1,22 +1,42 @@
 <template>
-  <el-container class=" w-screen">
-    <div class="w-center">
-      <el-form :ref="form" :model="form" :rules="rules" @submit.native.prevent="changePassword()">
-        <el-form-item label="Old Password" prop="password">
-          <el-input v-model="form.oldPass" show-password class="input-length" />
-        </el-form-item>
-        <el-form-item label="New Password" prop="password">
-          <el-input v-model="form.newPass" show-password />
-        </el-form-item>
-        <el-form-item label="Confirm New Password" prop="password">
-          <el-input v-model="form.confNewPass" show-password />
-        </el-form-item>
-        <el-button type="primary" native-type="submit">
-          save
-        </el-button>
-      </el-form>
+  <div>
+    <div>
+      <div class="flex w-full justify-center">
+        <div class="font-sans font-medium">
+          Change Password
+        </div>
+      </div>
     </div>
-  </el-container>
+    <div class="flex w-full justify-center">
+      <div class="mt-4">
+        <el-form
+          :ref="form"
+          :model="form"
+          label-width="200px"
+          :rules="rules"
+          @submit.native.prevent="changePassword()"
+        >
+          <div>
+            <div>
+              <el-form-item label="Old Password">
+                <el-input v-model="form.oldPass" placeholder="Old Password" type="password" />
+              </el-form-item>
+            </div>
+            <div>
+              <el-form-item label="New Password">
+                <el-input v-model="form.newPass" placeholder="New Password" type="password" />
+              </el-form-item>
+            </div>
+            <div>
+              <el-form-item label="Re-New Password">
+                <el-input v-model="form.confNewPass" placeholder="Re-New Password" type="password" />
+              </el-form-item>
+            </div>
+          </div>
+        </el-form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -58,9 +78,9 @@ export default {
   method: {
     ...mapActions('users', ['changePassword']),
 
-    changePassword () {
+    async changePassword () {
       try {
-        this.changePassword({
+        await this.changePassword({
           password: this.form.newPass
         })
       } catch (error) {

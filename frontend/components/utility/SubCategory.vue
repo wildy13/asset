@@ -73,7 +73,7 @@
         :visible.sync="dialogVisible"
       >
         <span>
-          <el-form ref="form" :model="form" :rules="rules">
+          <el-form ref="form" :model="form" label-width="100px" :rules="rules">
             <el-form-item label="Asset Category" prop="categoryId">
               <el-select v-model="form.categoryId" @change="handleCategoryChange">
                 <el-option
@@ -118,7 +118,7 @@
         :visible.sync="dialogVisible1"
       >
         <span>
-          <el-form ref="formEdit" :model="formEdit" :rules="rules">
+          <el-form ref="formEdit" :model="formEdit" label-width="100px" :rules="rules">
             <el-form-item label="Asset Category" prop="categoryId">
               <el-select v-model="formEdit.categoryId">
                 <el-option

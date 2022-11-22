@@ -40,7 +40,7 @@
         >
           <el-table-column type="selection" />
           <el-table-column type="index" label="No" class="table-col" />l
-          <el-table-column prop="employeeNo" label="Employee Number" />
+          <el-table-column prop="employeeNo" width="180" label="Employee Number" />
           <el-table-column prop="username" label="Name" />
           <el-table-column prop="email" label="Email" class="table-col" />
           <el-table-column label="Dapartment" class="table-col">
@@ -93,12 +93,12 @@
               :model="form"
               :rules="rules"
               :hide-required-asterisk="true"
-              label-position="top"
+              label-width="130px"
               @submit.native.prevent="submitForm('form')"
             >
               <div class="flex">
                 <div>
-                  <el-form-item prop="username">
+                  <el-form-item prop="username" label="Username">
                     <el-input
                       v-model="form.username"
                       label="Username"
@@ -106,15 +106,15 @@
                     />
                   </el-form-item>
                 </div>
-                <div class="mx-2">
-                  <el-form-item prop="email">
+                <div>
+                  <el-form-item prop="email" label="Email">
                     <el-input v-model="form.email" placeholder="Email" />
                   </el-form-item>
                 </div>
               </div>
               <div class="flex">
                 <div>
-                  <el-form-item prop="password">
+                  <el-form-item prop="password" label="Password">
                     <el-input
                       v-model="form.password"
                       show-password
@@ -122,8 +122,8 @@
                     />
                   </el-form-item>
                 </div>
-                <div class="mx-2">
-                  <el-form-item prop="confirmPassword">
+                <div>
+                  <el-form-item prop="confirmPassword" label="Confirm Password">
                     <el-input
                       v-model="form.confirmPassword"
                       show-password
@@ -134,7 +134,7 @@
               </div>
               <div class="flex justify-between">
                 <div>
-                  <el-form-item prop="dapartmentId">
+                  <el-form-item prop="dapartmentId" label="Dapartment">
                     <el-select
                       v-model="form.dapartementId"
                       placeholder="Dapartement"
@@ -150,11 +150,10 @@
                   </el-form-item>
                 </div>
                 <div>
-                  <el-form-item prop="sectionId">
+                  <el-form-item prop="sectionId" label="Section">
                     <el-select
                       v-model="form.sectionId"
                       placeholder="Section"
-                      class="mx-2"
                     >
                       <el-option
                         v-for="item in selectDataSection"
@@ -168,19 +167,18 @@
               </div>
               <div class="flex">
                 <div>
-                  <el-form-item prop="employeeNo">
+                  <el-form-item prop="employeeNo" label="Employee No">
                     <el-input
                       v-model="form.employeeNo"
                       placeholder="Employee No"
                     />
                   </el-form-item>
                 </div>
-                <div class="mx-2">
-                  <el-form-item prop="roleId">
+                <div>
+                  <el-form-item prop="roleId" label="Role">
                     <el-select
                       v-model="form.roleId"
                       placeholder="Role"
-                      class="mx-2"
                     >
                       <el-option
                         v-for="item in selectDataRole"
@@ -216,28 +214,27 @@
             :model="formEdit"
             :rules="rules"
             :hide-required-asterisk="true"
-            label-position="top"
+            label-width="130px"
             @submit.native.prevent="editForm()"
           >
             <div class="flex">
               <div>
-                <el-form-item prop="username">
+                <el-form-item prop="username" label="Username">
                   <el-input
                     v-model="formEdit.username"
-                    label="Username"
                     placeholder="Username"
                   />
                 </el-form-item>
               </div>
-              <div class="mx-2">
-                <el-form-item prop="email">
+              <div>
+                <el-form-item prop="email" label="Email">
                   <el-input v-model="formEdit.email" placeholder="Email" />
                 </el-form-item>
               </div>
             </div>
             <div class="flex justify-between">
               <div>
-                <el-form-item prop="dapartmentId">
+                <el-form-item prop="dapartmentId" label="Dapartment">
                   <el-select
                     v-model="formEdit.dapartementId"
                     placeholder="Dapartement"
@@ -253,11 +250,10 @@
                 </el-form-item>
               </div>
               <div>
-                <el-form-item prop="sectionId">
+                <el-form-item prop="sectionId" label="Section">
                   <el-select
                     v-model="formEdit.sectionId"
                     placeholder="Section"
-                    class="mx-2"
                   >
                     <el-option
                       v-for="item in selectDataSection"
@@ -269,31 +265,20 @@
                 </el-form-item>
               </div>
             </div>
-            <div class="flex">
-              <div>
-                <el-form-item prop="employeeNo">
-                  <el-input
-                    v-model="formEdit.employeeNo"
-                    placeholder="Employee No"
+            <div class="w-max">
+              <el-form-item prop="roleId" label="Role">
+                <el-select
+                  v-model="formEdit.roleId"
+                  placeholder="Role"
+                >
+                  <el-option
+                    v-for="item in selectDataRole"
+                    :key="item.id"
+                    :label="item.name"
+                    :value="item.id"
                   />
-                </el-form-item>
-              </div>
-              <div class="mx-2">
-                <el-form-item prop="roleId">
-                  <el-select
-                    v-model="formEdit.roleId"
-                    placeholder="Role"
-                    class="mx-2"
-                  >
-                    <el-option
-                      v-for="item in selectDataRole"
-                      :key="item.id"
-                      :label="item.name"
-                      :value="item.id"
-                    />
-                  </el-select>
-                </el-form-item>
-              </div>
+                </el-select>
+              </el-form-item>
             </div>
             <div class="mt-12">
               <el-button
@@ -354,7 +339,7 @@ export default {
       multipleSelection: [],
       miniSearch: new MiniSearch({
         idField: ['id'],
-        fields: ['username', 'employeeNo', 'dapartement'],
+        fields: ['username', 'employeeNo', 'dapartementId'],
         storeFields: [
           'username',
           'employeeNo',
