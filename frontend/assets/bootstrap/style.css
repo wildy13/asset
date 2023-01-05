@@ -14,9 +14,6 @@
     @apply w-full flex justify-end
 }
 
-.el-form-item{
-    @apply flex bg-white justify-between rounded-md
-}
 
 .el-form-item__label
 {
