@@ -14,8 +14,7 @@ const connect = async () => {
     await sequelize.authenticate();
     console.log('Connection has been established successfully.');
   } catch (err) {
-    console.log(err);
-    // throw new Error(err);
+    throw new Error(err);
   }
 };
 

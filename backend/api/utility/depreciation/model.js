@@ -1,7 +1,5 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../../../config');
-const Category = require('../category/model');
-const SubCategory = require('../subCategory/model');
 
 const Depreciation = sequelize.define(
   'depreciation',
@@ -31,18 +29,10 @@ const Depreciation = sequelize.define(
     categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: Category,
-        key: 'id',
-      },
     },
     subcategoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: SubCategory,
-        key: 'id',
-      },
     },
   },
   {

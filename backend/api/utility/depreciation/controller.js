@@ -1,9 +1,19 @@
-const Depreciation = require('./model');
+const { Depreciation, Category, SubCategory } = require('./relations');
 
 const getDepreciation = async (req, res) => {
   try {
     const depreciation = await Depreciation.findAll({
       attributes: ['id', 'type', 'year', 'rate', 'method', 'categoryId', 'subcategoryId', 'createdAt', 'updatedAt'],
+      include: [
+        {
+          model: Category,
+          attributes: ['name'],
+        },
+        {
+          model: SubCategory,
+          attributes: ['name'],
+        },
+      ],
     });
     res.json(depreciation);
   } catch (error) {

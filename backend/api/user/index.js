@@ -16,5 +16,5 @@ router.post('/delete', isAdmin(), deleteUsers);
 
 // PUT Router
 router.put('/:id', isAdmin(), editUsers);
-router.put('/:id', isAuthenticated(), changePassword);
+router.post('/change/:id', isAuthenticated(), changePassword);
 module.exports = router;

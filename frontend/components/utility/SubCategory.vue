@@ -33,12 +33,12 @@
           <el-table-column type="index" label="No" />
           <el-table-column label="Category Code" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? categoryCode[scope.row.categoryId] : 'error' }}
+              {{ scope.row.category.categoryCode }}
             </template>
           </el-table-column>
           <el-table-column label="Category Name" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? categoryId[scope.row.categoryId] : 'error' }}
+              {{ scope.row.category.name }}
             </template>
           </el-table-column>
           <el-table-column prop="subcategoryCode" label="Sub Code" />

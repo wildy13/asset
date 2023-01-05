@@ -35,7 +35,7 @@
           <el-table-column prop="name" label="Name" class="table-col" />
           <el-table-column label="Dapartment" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? dapartment[scope.row.dapartmentId] : 'error' }}
+              {{ scope.row.dapartment.name }}
             </template>
           </el-table-column>
           <el-table-column prop="createdAt" label="Created At" class="table-col" />
@@ -204,8 +204,7 @@ export default {
         name: '',
         sectionCode: '',
         dapartmentId: ''
-      },
-      dapartment: ['']
+      }
     }
   },
   computed: {
@@ -229,7 +228,6 @@ export default {
         await this.getSection()
         this.miniSearch.addAll(this.sectionData)
         await this.fetchDapartment()
-        this.dapartment.push(...this.selectData.map(value => value.name))
       } catch (error) {
         this.$message({
           title: 'error',

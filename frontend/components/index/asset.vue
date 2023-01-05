@@ -9,7 +9,7 @@
           </el-button>
 
           <!-- Print Button -->
-          <el-button type="primary" icon="el-icon-printer">
+          <el-button type="primary" icon="el-icon-printer" @click="gPdf">
             Print
           </el-button>
 
@@ -44,12 +44,12 @@
           <el-table-column type="index" label="No" class="table-col" />l
           <el-table-column label="Category">
             <template slot-scope="scope">
-              {{ scope.row ? categoryId[scope.row.categoryId] : 'error' }}
+              {{ scope.row.category.name }}
             </template>
           </el-table-column>
           <el-table-column label="Sub Category">
             <template slot-scope="scope">
-              {{ scope.row ? subcategoryId[scope.row.subcategoryId] : 'error' }}
+              {{ scope.row.subcategory.name }}
             </template>
           </el-table-column>
           <el-table-column prop="name" label="Asset Name" />
@@ -60,15 +60,12 @@
           <el-table-column prop="date" label="Date of Purchase" />
           <el-table-column label="OR CUR">
             <template slot-scope="scope">
-              {{ scope.row ? currency[scope.row.currencyId] : 'error' }}
+              {{ scope.row.currency.name }}
             </template>
           </el-table-column>
           <el-table-column prop="price" label="Cost" />
           <el-table-column label="Date Allocation">
             -
-          </el-table-column>
-          <el-table-column label="Tipe">
-            T
           </el-table-column>
           <el-table-column align="right">
             <template slot-scope="scope">
@@ -279,6 +276,8 @@
 <script>
 import { mapActions, mapGetters } from 'vuex'
 import MiniSearch from 'minisearch'
+import { saveAs } from 'file-saver'
+
 export default {
   data () {
     return {
@@ -346,11 +345,6 @@ export default {
       /* end of form */
 
       /* array  */
-      categoryId: [''],
-      subcategoryId: [''],
-      dapartement: [''],
-      currency: [''],
-      section: [''],
       method: [''],
       rate: [''],
       year: [''],
@@ -492,11 +486,6 @@ export default {
         await this.getSection()
         await this.fetchAssets()
         this.miniSearch.addAll(this.depreciationData)
-        this.categoryId.push(...this.selectDataCategory.map(value => value.name))
-        this.subcategoryId.push(...this.selectDataSubCategory.map(value => value.name))
-        this.dapartement.push(...this.selectDataDapartment.map(value => value.name))
-        this.section.push(...this.selectDataSection.map(value => value.name))
-        this.currency.push(...this.selectDataCurrency.map(value => value.name))
       } catch (error) {
         this.$message({
           title: 'error',
@@ -514,7 +503,7 @@ export default {
     ...mapActions('section', ['fetchSection', 'getSection']),
     ...mapActions('currency', ['fetchCurrency']),
     ...mapActions('depreciation', ['filterDepreciation']),
-    ...mapActions('assets', ['inputAssets', 'fetchAssets', 'fetchDel', 'fetchEdit']),
+    ...mapActions('assets', ['inputAssets', 'fetchAssets', 'fetchDel', 'fetchEdit', 'fetchPdf']),
     onSave () {
       try {
         this.inputAssets({
@@ -553,6 +542,18 @@ export default {
         }
       }
     },
+
+    async gPdf () {
+      try {
+        const res = await this.fetchPdf()
+        if (res.status) {
+          saveAs('/report/asset.pdf', 'asset.pdf')
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    },
+
     async handleCategoryChange (id) {
       await this.fetchSubCategory({ id })
     },

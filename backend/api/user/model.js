@@ -1,9 +1,6 @@
 const { DataTypes } = require('sequelize');
 const { genSaltSync, hashSync, compareSync } = require('bcrypt');
 const { sequelize } = require('../../config/index');
-const Role = require('../role/model');
-const Dapartment = require('../dapartment/model');
-const Section = require('../section/model');
 
 const User = sequelize.define(
   'user',
@@ -50,27 +47,15 @@ const User = sequelize.define(
     dapartementId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: Dapartment,
-        key: 'id',
-      },
     },
 
     sectionId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: Section,
-        key: 'id',
-      },
     },
 
     roleId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: Role,
-        key: 'id',
-      },
     },
   },
   {

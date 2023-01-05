@@ -53,7 +53,6 @@
           :page-size="pageSize"
           :pager-count="pagerCount"
           :page-sizes="pageSizes"
-          style="margin-left: 1400px"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />

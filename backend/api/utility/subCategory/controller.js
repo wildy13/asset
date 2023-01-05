@@ -1,9 +1,15 @@
-const SubCategory = require('./model');
+const { SubCategory, Category } = require('./relations');
 
 const getSubCategory = async (req, res) => {
   try {
     const subcategory = await SubCategory.findAll({
       attributes: ['id', 'name', 'subcategoryCode', 'categoryId', 'createdAt', 'updatedAt'],
+      include: [
+        {
+          model: Category,
+          attributes: ['name', 'categoryCode'],
+        },
+      ],
     });
     res.json(subcategory);
   } catch (error) {

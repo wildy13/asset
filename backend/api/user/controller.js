@@ -1,4 +1,6 @@
-const User = require('./model');
+const {
+  User, Dapartment, Section, Role,
+} = require('./relations');
 
 const getUser = async (req, res) => {
   try {
@@ -11,6 +13,19 @@ const getUser = async (req, res) => {
         'dapartementId',
         'sectionId',
         'roleId',
+      ],
+      include: [{
+        model: Role,
+        attributes: ['name'],
+      },
+      {
+        model: Dapartment,
+        attributes: ['name'],
+      },
+      {
+        model: Section,
+        attributes: ['name'],
+      },
       ],
     });
     res.status(200).json(user);
@@ -110,18 +125,32 @@ const editUsers = async (req, res) => {
   res.status(200).json(save);
 };
 
-const changePassword = async (req) => {
+const changePassword = async (req, res) => {
+  const { oldPass, newPass } = req.body;
+
   const user = await User.findOne({
     attributes: [
       'id',
       'password',
+      'employeeNo',
     ],
     where: {
       id: req.params.id,
     },
   });
-  console.log(user);
+
+  const checkPassword = await user.authenticate(oldPass);
+
+  if (checkPassword) {
+    user.password = newPass;
+    await user.save();
+
+    res.status(200).json(user);
+  } else {
+    res.status(400).send('Your old password in invalid, please try again');
+  }
 };
+
 module.exports = {
   getUser,
   getMe,

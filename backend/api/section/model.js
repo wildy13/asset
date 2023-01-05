@@ -1,6 +1,5 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../../config');
-const Dapartment = require('../dapartment/model');
 
 const Section = sequelize.define(
   'section',
@@ -26,10 +25,7 @@ const Section = sequelize.define(
     },
     dapartmentId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: Dapartment,
-        key: 'id',
-      },
+      allowNull: false,
     },
   },
   {

@@ -1,4 +1,20 @@
-const Assets = require('./model');
+/* eslint-disable consistent-return */
+/* eslint-disable no-useless-concat */
+/* eslint-disable no-unused-vars */
+const fs = require('fs');
+const PdfPrinter = require('pdfmake');
+const {
+  Assets, Category, SubCategory, Dapartment, Section, Currency,
+} = require('./relations');
+
+const fonts = {
+  Roboto: {
+    normal: '../frontend/static/font/Roboto-Regular.ttf',
+    bold: '../frontend/static/font/Roboto-Medium.ttf',
+    bolditalics: '../frontend/static/font/Roboto-MediumItalic.ttf',
+  },
+};
+const printer = new PdfPrinter(fonts);
 
 const getAssets = async (req, res) => {
   try {
@@ -25,6 +41,26 @@ const getAssets = async (req, res) => {
         'year',
         'createdAt',
         'updatedAt',
+      ],
+      include: [{
+        model: Category,
+        attributes: ['name'],
+      }, {
+        model: SubCategory,
+        attributes: ['name'],
+      },
+      {
+        model: Dapartment,
+        attributes: ['name'],
+      },
+      {
+        model: Section,
+        attributes: ['name'],
+      },
+      {
+        model: Currency,
+        attributes: ['name'],
+      },
       ],
     });
     res.json(assets);
@@ -147,6 +183,109 @@ const editAssets = async (req, res) => {
   res.status(200).json(save);
 };
 
+const generatePdf = async (req, res, next) => {
+  try {
+    const assets = await Assets.findAll({
+      attributes: [
+        'id',
+        'name',
+        'brandModel',
+        'categoryId',
+        'subcategoryId',
+        'condition',
+        'status',
+        'dapartmentId',
+        'sectionId',
+        'po',
+        'date',
+        'qty',
+        'currencyId',
+        'price',
+        'exchange',
+        'type',
+        'method',
+        'rate',
+        'year',
+        'createdAt',
+        'updatedAt',
+      ],
+      include: [{
+        model: Category,
+        attributes: ['name'],
+      }, {
+        model: SubCategory,
+        attributes: ['name'],
+      },
+      {
+        model: Dapartment,
+        attributes: ['name'],
+      },
+      {
+        model: Section,
+        attributes: ['name'],
+      },
+      {
+        model: Currency,
+        attributes: ['name'],
+      },
+      ],
+    });
+
+    const tbl = [
+      ['No', 'Category', 'Sub Category', 'Asset Name'],
+    ];
+
+    assets.map((val, index) => {
+      tbl.push([
+        { text: (index + 1), alignment: 'center' },
+        { text: val.category.name },
+        { text: val.subcategory.name },
+        { text: val.name },
+      ]);
+
+      return true;
+    });
+
+    const docDefinition = {
+      content: [
+        { text: 'A simple table (no headers, no width specified, no spans, no styling)', style: 'subheader' },
+        'The following table has nothing more than a body array',
+        {
+          style: 'tableExample',
+          table: {
+            body: tbl,
+          },
+        },
+      ],
+      styles: {
+        subheader: {
+          fontSize: 16,
+          bold: true,
+          margin: [0, 10, 0, 5],
+        },
+        tableExample: {
+          margin: [0, 5, 0, 15],
+        },
+      },
+    };
+
+    return new Promise((resolve) => {
+      const pdfDoc = printer.createPdfKitDocument(docDefinition);
+      pdfDoc.pipe(fs.createWriteStream('../frontend/static/report/asset.pdf'));
+      pdfDoc.on('end', () => {
+        res.status(200).json({ status: 1 });
+      });
+      pdfDoc.end();
+    });
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
+
 module.exports = {
-  getAssets, inputAssets, deleteAssets, editAssets,
+  getAssets,
+  inputAssets,
+  deleteAssets,
+  editAssets,
+  generatePdf,
 };

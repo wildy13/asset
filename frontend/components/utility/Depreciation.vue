@@ -33,12 +33,12 @@
           <el-table-column type="index" label="No" />
           <el-table-column label="Category Name" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? categoryId[scope.row.categoryId] : 'error' }}
+              {{ scope.row.category.name }}
             </template>
           </el-table-column>
           <el-table-column label="Sub Category Name" class="table-col">
             <template slot-scope="scope">
-              {{ subcategoryId[scope.row.subcategoryId] }}
+              {{scope.row.subcategory.name }}
             </template>
           </el-table-column>
           <el-table-column prop="method" label="Method Name" />
@@ -148,7 +148,7 @@
         :visible.sync="dialogVisible1"
       >
         <span>
-          <el-form ref="formEdit" :model="formEdit"  label-width="130px" :rules="rules">
+          <el-form ref="formEdit" :model="formEdit" label-width="130px" :rules="rules">
             <el-form-item label="Category Name " prop="categoryId">
               <el-select v-model="formEdit.categoryId">
                 <el-option
@@ -259,8 +259,6 @@ export default {
       pageSizes: [5, 10, 20, 50],
       search: '',
       filtered: [],
-      categoryId: [''],
-      subcategoryId: [''],
       multipleSelection: [],
       miniSearch: new MiniSearch({
         idField: ['id'],
@@ -348,8 +346,6 @@ export default {
         await this.fetchCategory()
         await this.getSubCategory()
         this.miniSearch.addAll(this.depreciationData)
-        this.categoryId.push(...this.selectDataCategory.map(value => value.name))
-        this.subcategoryId.push(...this.selectDataSubCategory.map(value => value.name))
       } catch (error) {
         this.$message({
           title: 'error',

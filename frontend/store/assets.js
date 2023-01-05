@@ -39,7 +39,12 @@ export const actions = {
     commit('deleteAssets', res)
   },
   async fetchEdit ({ commit }, payload) {
-    const res = await this.$axios.$put(`api/asset/${payload.id}`, payload)
+    const res = await this.$axios.$put(`/api/asset/${payload.id}`, payload)
     commit('updateAssets', res)
+  },
+
+  async fetchPdf ({ commit }) {
+    const res = await this.$axios.$get('/api/asset/download')
+    return res
   }
 }

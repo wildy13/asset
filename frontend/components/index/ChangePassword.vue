@@ -5,6 +5,7 @@
         <div class="font-sans font-medium">
           Change Password
         </div>
+        <div>You will be force to logout after change</div>
       </div>
     </div>
     <div class="flex w-full justify-center">
@@ -14,7 +15,6 @@
           :model="form"
           label-width="200px"
           :rules="rules"
-          @submit.native.prevent="changePassword()"
         >
           <div>
             <div>
@@ -32,6 +32,15 @@
                 <el-input v-model="form.confNewPass" placeholder="Re-New Password" type="password" />
               </el-form-item>
             </div>
+            <span slot="footer" class="dialog-footer">
+              <el-button
+                type="primary"
+                class="w-full"
+                @click="onSave"
+              >
+                Save
+              </el-button>
+            </span>
           </div>
         </el-form>
       </div>
@@ -75,19 +84,23 @@ export default {
       }
     }
   },
-  method: {
+  methods: {
     ...mapActions('users', ['changePassword']),
 
-    async changePassword () {
+    async onSave () {
       try {
         await this.changePassword({
-          password: this.form.newPass
+          id: this.$auth.user.id,
+          oldPass: this.form.oldPass,
+          newPass: this.form.newPass,
+          confNewPass: this.form.confNewPass
         })
-      } catch (error) {
-        if (error.response) {
+        this.$auth.logout()
+      } catch ({ response: { data } }) {
+        if (data) {
           this.$message({
             title: 'error',
-            message: error.response.data.msg,
+            message: data,
             type: 'error'
           })
         }

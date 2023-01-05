@@ -1,9 +1,15 @@
-const Section = require('./model');
+const { Section, Dapartment } = require('./relations');
 
 const getSection = async (req, res) => {
   try {
     const section = await Section.findAll({
       attributes: ['id', 'sectionCode', 'name', 'dapartmentId', 'createdAt', 'updatedAt'],
+      include: [
+        {
+          model: Dapartment,
+          attributes: ['name'],
+        },
+      ],
     });
     res.json(section);
   } catch (error) {

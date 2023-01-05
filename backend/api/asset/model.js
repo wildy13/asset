@@ -1,10 +1,5 @@
 const { DataTypes } = require('sequelize');
 const { sequelize } = require('../../config');
-const Dapartment = require('../dapartment/model');
-const Section = require('../section/model');
-const Category = require('../utility/category/model');
-const SubCategory = require('../utility/subCategory/model');
-const Currency = require('../utility/currency/model');
 
 const Assets = sequelize.define(
   'assets',
@@ -30,18 +25,10 @@ const Assets = sequelize.define(
     categoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: Category,
-        key: 'id',
-      },
     },
     subcategoryId: {
       type: DataTypes.INTEGER,
       allowNull: false,
-      references: {
-        model: SubCategory,
-        key: 'id',
-      },
     },
     condition: {
       type: DataTypes.STRING,
@@ -53,17 +40,9 @@ const Assets = sequelize.define(
     },
     dapartmentId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: Dapartment,
-        key: 'id',
-      },
     },
     sectionId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: Section,
-        key: 'id',
-      },
     },
     po: {
       type: DataTypes.STRING,
@@ -79,10 +58,7 @@ const Assets = sequelize.define(
     },
     currencyId: {
       type: DataTypes.INTEGER,
-      references: {
-        model: Currency,
-        key: 'id',
-      },
+      allowNull: false,
     },
     price: {
       type: DataTypes.INTEGER,
@@ -94,19 +70,15 @@ const Assets = sequelize.define(
     },
     type: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     method: {
       type: DataTypes.STRING,
-      allowNull: false,
     },
     rate: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
     },
     year: {
       type: DataTypes.INTEGER,
-      allowNull: false,
     },
   },
   {

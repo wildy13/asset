@@ -45,17 +45,17 @@
           <el-table-column prop="email" label="Email" class="table-col" />
           <el-table-column label="Dapartment" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? dapartementId[scope.row.dapartementId] : "error" }}
+              {{ scope.row.dapartment.name  }}
             </template>
           </el-table-column>
           <el-table-column label="Section" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? sectionId[scope.row.sectionId] : "error" }}
+              {{ scope.row.section.name }}
             </template>
           </el-table-column>
           <el-table-column label="Role" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row ? roles[scope.row.roleId] : "error" }}
+              {{ scope.row.role.name  }}
             </template>
           </el-table-column>
           <el-table-column align="right">
@@ -327,9 +327,6 @@ export default {
         roleId: ''
       },
       activeIndex: 'ManagementUser',
-      roles: [''],
-      dapartementId: [''],
-      sectionId: [''],
       page: 1,
       pageSize: 5,
       pagerCount: 5,
@@ -446,13 +443,6 @@ export default {
         await this.fetchRoles()
         await this.fetchDapartment()
         await this.getSection()
-        this.roles.push(...this.selectDataRole.map(value => value.name))
-        this.dapartementId.push(
-          ...this.selectDataDapartment.map(value => value.name)
-        )
-        this.sectionId.push(
-          ...this.selectDataSection.map(value => value.name)
-        )
       } catch (error) {
         this.$message({
           title: 'error',
