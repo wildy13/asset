@@ -63,32 +63,31 @@
         title="Input Currency"
         :visible.sync="dialogVisible"
       >
-        <span>
-          <el-form ref="form" :model="form" label-width="100px" :rules="rules">
-            <el-form-item label="Code">
-              <el-input
-                v-model="form.currencyCode"
-              />
-            </el-form-item>
-            <el-form-item label="Name">
-              <el-input
-                v-model="form.name"
-              />
-            </el-form-item>
-            <el-form-item label="Symbol">
-              <el-input
-                v-model="form.currencySymbol"
-              />
-            </el-form-item>
-          </el-form>
-        </span>
-        <span slot="footer" class="dialog-footer">
-          <el-button @click="dialogVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="onSave">Save</el-button>
-        </span>
+        <el-form
+          ref="form"
+          :model="form"
+          :rules="rules"
+          label-width="120px"
+        >
+          <el-form-item label="Code" :label-width="formLabelWidth">
+            <el-input v-model="form.currencyCode"></el-input>
+          </el-form-item>
+          <el-form-item label="Name">
+            <el-input v-model="form.name" :label-width="formLabelWidth"></el-input>
+          </el-form-item>
+          <el-form-item label="Symbol">
+            <el-input v-model="form.currencySymbol" :label-width="formLabelWidth"></el-input>
+          </el-form-item>
+          <div>
+            <el-button @click="dialogVisible = false">
+              Cancel
+            </el-button>
+            <el-button type="primary" @click="onSave">
+              Save
+            </el-button>
+          </div>
+        </el-form>
       </el-dialog>
-      <!-- End of add dialog -->
-      <!-- Edit Dialog -->
       <el-dialog
         title="Input Role-based"
         :visible.sync="dialogVisible1"
@@ -137,6 +136,7 @@ export default {
       }
     }
     return {
+      formLabelWidth: '120px',
       activeIndex: 'currency',
       dialogVisible: false,
       dialogVisible1: false,

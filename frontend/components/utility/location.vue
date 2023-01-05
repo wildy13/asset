@@ -5,7 +5,7 @@
         <div class="flex">
           <!-- Add Button -->
           <el-button type="primary" icon="el-icon-circle-plus-outline" @click="dialogVisible = true">
-            Add Category
+            Add Location
           </el-button>
 
           <!-- Delete Button -->

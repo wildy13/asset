@@ -84,7 +84,7 @@
       >
         <span>
           <el-form ref="form" :model="form" label-width="130px" :rules="rules">
-            <el-form-item label="Category Name " prop="categoryId">
+            <el-form-item label="Category Name " :label-width="formLabelWidth" prop="categoryId">
               <el-select v-model="form.categoryId" @change="handleCategoryChange">
                 <el-option
                   v-for=" item in selectDataCategory"
@@ -94,7 +94,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Sub Category " prop="subcategoryId">
+            <el-form-item label="Sub Category " :label-width="formLabelWidth" prop="subcategoryId">
               <el-select v-model="form.subcategoryId">
                 <el-option
                   v-for=" item in selectDataSubCategory"
@@ -104,7 +104,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Type Asset " prop="type">
+            <el-form-item label="Type Asset " :label-width="formLabelWidth" prop="type">
               <el-select v-model="form.type">
                 <el-option
                   v-for="item in type"
@@ -114,7 +114,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Methode " prop="method">
+            <el-form-item label="Methode " :label-width="formLabelWidth" prop="method">
               <el-select v-model="form.method">
                 <el-option
                   v-for="item in method"
@@ -124,12 +124,12 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Rate">
+            <el-form-item label="Rate" :label-width="formLabelWidth">
               <el-input
                 v-model="form.rate"
               />
             </el-form-item>
-            <el-form-item label="Life">
+            <el-form-item label="Life" :label-width="formLabelWidth">
               <el-input
                 v-model="form.year"
               />
@@ -149,7 +149,7 @@
       >
         <span>
           <el-form ref="formEdit" :model="formEdit" label-width="130px" :rules="rules">
-            <el-form-item label="Category Name " prop="categoryId">
+            <el-form-item label="Category Name " prop="categoryId" :label-width="formLabelWidth">
               <el-select v-model="formEdit.categoryId">
                 <el-option
                   v-for=" item in selectDataCategory"
@@ -159,7 +159,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Sub Category " prop="subcategoryId">
+            <el-form-item label="Sub Category " prop="subcategoryId" :label-width="formLabelWidth">
               <el-select v-model="formEdit.subcategoryId">
                 <el-option
                   v-for=" item in selectDataSubCategory"
@@ -169,7 +169,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Type Asset " prop="type">
+            <el-form-item label="Type Asset " prop="type" :label-width="formLabelWidth">
               <el-select v-model="formEdit.type">
                 <el-option
                   v-for="item in type"
@@ -179,7 +179,7 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Methode " prop="method">
+            <el-form-item label="Methode " prop="method" :label-width="formLabelWidth">
               <el-select v-model="formEdit.method">
                 <el-option
                   v-for="item in method"
@@ -189,12 +189,12 @@
                 />
               </el-select>
             </el-form-item>
-            <el-form-item label="Rate">
+            <el-form-item label="Rate" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.rate"
               />
             </el-form-item>
-            <el-form-item label="Life">
+            <el-form-item label="Life" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.year"
               />
@@ -226,6 +226,7 @@ export default {
       }
     }
     return {
+      formLabelWidth: '120px',
       type: [
         {
           value: 'Bangunan',

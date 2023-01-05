@@ -63,14 +63,14 @@
         :visible.sync="dialogVisible"
       >
         <span>
-          <el-form ref="form" :model="form" :rules="rules">
-            <el-form-item label="Name of Dapartment">
+          <el-form ref="form" :model="form" label-width="150px" :rules="rules">
+            <el-form-item label="Name of Dapartment" :label-width="formLabelWidth">
               <el-input
                 v-model="form.name"
                 placeholder="Ex; IT, HRD"
               />
             </el-form-item>
-            <el-form-item label="Code of Dapartment">
+            <el-form-item label="Code of Dapartment" :label-width="formLabelWidth">
               <el-input
                 v-model="form.dapartmentCode"
               />
@@ -89,14 +89,14 @@
         :visible.sync="dialogVisible1"
       >
         <span>
-          <el-form ref="formEdit" :model="formEdit" :rules="rules">
-            <el-form-item label="Name of Dapartment">
+          <el-form ref="formEdit" :model="formEdit" label-width="150px" :rules="rules">
+            <el-form-item label="Name of Dapartment" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.name"
                 placeholder="Ex; IT, HRD"
               />
             </el-form-item>
-            <el-form-item label="Code of Dapartment">
+            <el-form-item label="Code of Dapartment" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.dapartmentCode"
               />
@@ -128,6 +128,7 @@ export default {
       }
     }
     return {
+      formLabelWidth: '150px',
       activeIndex: 'dapartment',
       dialogVisible: false,
       dialogVisible1: false,

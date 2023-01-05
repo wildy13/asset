@@ -5,7 +5,9 @@
         <div class="font-sans font-medium">
           Change Password
         </div>
-        <div>You will be force to logout after change</div>
+      </div>
+      <div class="text-center font-sans font-light">
+        You will be force to logout after change
       </div>
     </div>
     <div class="flex w-full justify-center">
@@ -18,17 +20,17 @@
         >
           <div>
             <div>
-              <el-form-item label="Old Password">
+              <el-form-item label="Old Password" :label-width="formLabelWidth">
                 <el-input v-model="form.oldPass" placeholder="Old Password" type="password" />
               </el-form-item>
             </div>
             <div>
-              <el-form-item label="New Password">
+              <el-form-item label="New Password" :label-width="formLabelWidth">
                 <el-input v-model="form.newPass" placeholder="New Password" type="password" />
               </el-form-item>
             </div>
             <div>
-              <el-form-item label="Re-New Password">
+              <el-form-item label="Re-New Password" :label-width="formLabelWidth">
                 <el-input v-model="form.confNewPass" placeholder="Re-New Password" type="password" />
               </el-form-item>
             </div>
@@ -54,6 +56,7 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
+      formLabelWidth: '120px',
       form: {
         oldPass: '',
         newPass: '',

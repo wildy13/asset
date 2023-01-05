@@ -93,12 +93,12 @@
               :model="form"
               :rules="rules"
               :hide-required-asterisk="true"
-              label-width="130px"
+              label-width="150px"
               @submit.native.prevent="submitForm('form')"
             >
               <div class="flex">
                 <div>
-                  <el-form-item prop="username" label="Username">
+                  <el-form-item prop="username" label="Username" :label-width="formLabelWidth">
                     <el-input
                       v-model="form.username"
                       label="Username"
@@ -107,14 +107,14 @@
                   </el-form-item>
                 </div>
                 <div>
-                  <el-form-item prop="email" label="Email">
+                  <el-form-item prop="email" label="Email" :label-width="formLabelWidth">
                     <el-input v-model="form.email" placeholder="Email" />
                   </el-form-item>
                 </div>
               </div>
               <div class="flex">
                 <div>
-                  <el-form-item prop="password" label="Password">
+                  <el-form-item prop="password" label="Password" :label-width="formLabelWidth">
                     <el-input
                       v-model="form.password"
                       show-password
@@ -123,7 +123,7 @@
                   </el-form-item>
                 </div>
                 <div>
-                  <el-form-item prop="confirmPassword" label="Confirm Password">
+                  <el-form-item prop="confirmPassword" label="Confirm Password" :label-width="formLabelWidth">
                     <el-input
                       v-model="form.confirmPassword"
                       show-password
@@ -134,7 +134,7 @@
               </div>
               <div class="flex justify-between">
                 <div>
-                  <el-form-item prop="dapartmentId" label="Dapartment">
+                  <el-form-item prop="dapartmentId" label="Dapartment" :label-width="formLabelWidth">
                     <el-select
                       v-model="form.dapartementId"
                       placeholder="Dapartement"
@@ -150,7 +150,7 @@
                   </el-form-item>
                 </div>
                 <div>
-                  <el-form-item prop="sectionId" label="Section">
+                  <el-form-item prop="sectionId" label="Section" :label-width="formLabelWidth">
                     <el-select
                       v-model="form.sectionId"
                       placeholder="Section"
@@ -167,7 +167,7 @@
               </div>
               <div class="flex">
                 <div>
-                  <el-form-item prop="employeeNo" label="Employee No">
+                  <el-form-item prop="employeeNo" label="Employee No" :label-width="formLabelWidth">
                     <el-input
                       v-model="form.employeeNo"
                       placeholder="Employee No"
@@ -175,7 +175,7 @@
                   </el-form-item>
                 </div>
                 <div>
-                  <el-form-item prop="roleId" label="Role">
+                  <el-form-item prop="roleId" label="Role" :label-width="formLabelWidth">
                     <el-select
                       v-model="form.roleId"
                       placeholder="Role"
@@ -214,12 +214,12 @@
             :model="formEdit"
             :rules="rules"
             :hide-required-asterisk="true"
-            label-width="130px"
+            label-width="150px"
             @submit.native.prevent="editForm()"
           >
             <div class="flex">
               <div>
-                <el-form-item prop="username" label="Username">
+                <el-form-item prop="username" label="Username" :label-width="formLabelWidth">
                   <el-input
                     v-model="formEdit.username"
                     placeholder="Username"
@@ -227,14 +227,14 @@
                 </el-form-item>
               </div>
               <div>
-                <el-form-item prop="email" label="Email">
+                <el-form-item prop="email" label="Email" :label-width="formLabelWidth">
                   <el-input v-model="formEdit.email" placeholder="Email" />
                 </el-form-item>
               </div>
             </div>
             <div class="flex justify-between">
               <div>
-                <el-form-item prop="dapartmentId" label="Dapartment">
+                <el-form-item prop="dapartmentId" label="Dapartment" :label-width="formLabelWidth">
                   <el-select
                     v-model="formEdit.dapartementId"
                     placeholder="Dapartement"
@@ -250,7 +250,7 @@
                 </el-form-item>
               </div>
               <div>
-                <el-form-item prop="sectionId" label="Section">
+                <el-form-item prop="sectionId" label="Section" :label-width="formLabelWidth">
                   <el-select
                     v-model="formEdit.sectionId"
                     placeholder="Section"
@@ -266,7 +266,7 @@
               </div>
             </div>
             <div class="w-max">
-              <el-form-item prop="roleId" label="Role">
+              <el-form-item prop="roleId" label="Role" :label-width="formLabelWidth">
                 <el-select
                   v-model="formEdit.roleId"
                   placeholder="Role"
@@ -314,6 +314,7 @@ export default {
       }
     }
     return {
+      formLabelWidth: '150px',
       dialogVisible: false,
       dialogVisible1: false,
       form: {

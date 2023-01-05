@@ -10,18 +10,18 @@
 
           <!-- Print Button -->
           <el-button type="primary" icon="el-icon-printer" @click="gPdf">
-            Print
+            Create Reports
           </el-button>
 
           <!-- Tag Asset Button -->
-          <el-button type="primary" icon="el-icon-printer">
+          <!--           <el-button type="primary" icon="el-icon-printer">
             Tag Asset
-          </el-button>
+          </el-button> -->
 
           <!-- Non Tag Button -->
-          <el-button type="primary" icon="el-icon-printer">
+          <!--           <el-button type="primary" icon="el-icon-printer">
             Non Tag
-          </el-button>
+          </el-button> -->
         </div>
         <div>
           <!-- Search -->

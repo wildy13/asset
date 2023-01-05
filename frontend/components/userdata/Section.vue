@@ -68,19 +68,19 @@
         :visible.sync="dialogVisible"
       >
         <span>
-          <el-form ref="form" :model="form" :rules="rules">
-            <el-form-item label="Name of Section">
+          <el-form ref="form" label-width="130px" :model="form" :rules="rules">
+            <el-form-item label="Name of Section" :label-width="formLabelWidth">
               <el-input
                 v-model="form.name"
                 placeholder="Ex; IT, HRD"
               />
             </el-form-item>
-            <el-form-item label="Code of Section">
+            <el-form-item label="Code of Section" :label-width="formLabelWidth">
               <el-input
                 v-model="form.sectionCode"
               />
             </el-form-item>
-            <el-form-item label="Dapartment" prop="dapartmentId">
+            <el-form-item label="Dapartment" prop="dapartmentId" :label-width="formLabelWidth">
               <el-select v-model="form.dapartmentId">
                 <el-option
                   v-for="item in selectData"
@@ -104,19 +104,19 @@
         :visible.sync="dialogVisible1"
       >
         <span>
-          <el-form ref="formEdit" :model="formEdit" :rules="rules">
-            <el-form-item label="Name of Section">
+          <el-form ref="formEdit" :label-width="formLabelWidth" :model="formEdit" :rules="rules">
+            <el-form-item label="Name of Section" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.name"
                 placeholder="Ex; IT, HRD"
               />
             </el-form-item>
-            <el-form-item label="Code of Section">
+            <el-form-item label="Code of Section" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.sectionCode"
               />
             </el-form-item>
-            <el-form-item label="Dapartment" prop="dapartmentId">
+            <el-form-item label="Dapartment" prop="dapartmentId" :label-width="formLabelWidth">
               <el-select v-model="formEdit.dapartmentId">
                 <el-option
                   v-for="item in selectData"
@@ -153,6 +153,7 @@ export default {
       }
     }
     return {
+      formLabelWidth: '120px',
       activeIndex: 'section',
       dialogVisible: false,
       dialogVisible1: false,

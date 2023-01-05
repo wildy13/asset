@@ -63,8 +63,8 @@
         :visible.sync="dialogVisible"
       >
         <span>
-          <el-form ref="form" :model="form" :rules="rules">
-            <el-form-item label="Role name">
+          <el-form ref="form" :model="form" label-width="10px" :rules="rules">
+            <el-form-item label="Role name" :label-width="formLabelWidth">
               <el-input
                 v-model="form.name"
                 placeholder="Ex; Admin, Users, Maneger"
@@ -85,7 +85,7 @@
       >
         <span>
           <el-form ref="formEdit" :model="formEdit" :rules="rules">
-            <el-form-item label="Role name">
+            <el-form-item label="Role name" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.name"
                 placeholder="Ex; Admin, Users, Maneger"
@@ -118,6 +118,7 @@ export default {
       }
     }
     return {
+      formLabelWidth: '100px',
       activeIndex: 'RoleUser',
       dialogVisible: false,
       dialogVisible1: false,
@@ -131,7 +132,6 @@ export default {
       search: '',
       filtered: [],
       multipleSelection: [],
-      formLabelWidth: '150px',
       miniSearch: new MiniSearch({
         idField: ['id'],
         fields: ['name'],

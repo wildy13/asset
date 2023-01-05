@@ -14,12 +14,6 @@
     @apply w-full flex justify-end
 }
 
-
-.el-form-item__label
-{
-    @apply mr-1
-}
-
 .el-dialog
 {
     @apply w-max
