@@ -78,6 +78,7 @@
             <el-form-item label="Code of Section" :label-width="formLabelWidth">
               <el-input
                 v-model="form.sectionCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Dapartment" prop="dapartmentId" :label-width="formLabelWidth">
@@ -114,6 +115,7 @@
             <el-form-item label="Code of Section" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.sectionCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Dapartment" prop="dapartmentId" :label-width="formLabelWidth">

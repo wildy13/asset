@@ -1,94 +1,70 @@
-<!-- eslint-disable vue/valid-template-root -->
 <template>
-  <div class="min-h-screen bg-slate-800">
-    <div class="flex min-h-screen justify-center items-center">
-      <div class="w-2/4">
-        <el-form
-          ref="form"
-          :model="form"
-          :rules="rules"
-          :hide-required-asterisk="true"
-          label-position="top"
-          @submit.native.prevent="submitForm('form')"
-        >
-          <div class="text-center text-white font-sans font-light">
-            <div class="border-b border-white my-4">
-              Asset System
+  <section class="h-screen">
+    <div class="container px-6 py-12 h-full">
+      <div class="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
+        <div class="md:w-8/12 lg:w-6/12 mb-12 md:mb-0">
+          <img
+            src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.svg"
+            class="w-full"
+            alt="Phone image"
+          />
+        </div>
+        <div class="md:w-12/12 lg:w-3/12 lg:ml-20">
+          <div class="text-center text-red-500">
+            {{ error }}
+          </div>
+          <div class="text-3xl text-center mb-4 font-sans">
+            Asset System
+          </div>
+          <el-form
+            ref="form"
+            :model="form"
+            :rules="rules"
+            :hide-required-asterisk="true"
+            label-position="top"
+            @submit.native.prevent="submitForm('form')"
+          >
+            <div class="mb-6">
+              <el-form-item>
+                <el-input
+                  v-model="form.username"
+                  type="text"
+                  placeholder="Username"
+                ></el-input>
+              </el-form-item>
             </div>
-            <el-form-item prop="username">
-              <input v-model="form.username" size="large" placeholder="Username" class="placeholder:text-slate-400 text-center bg-white  rounded-md w-full text-black " />
-            </el-form-item>
-          </div>
-          <div>
-            <el-form-item prop="password">
-              <input
-                v-model="form.password"
-                size="large"
-                type="password"
-                placeholder="Password"
-                class="placeholder:text-slate-400 text-center bg-white  rounded-md w-full text-black "
-              />
-            </el-form-item>
-          </div>
-          <div class="bg-slate-600 hover:bg-slate-400 rounded-md">
-            <button type="primary" native-type="submit" class="justify-center text-white font-serif w-full">
-              Log in
-            </button>
-          </div>
-        </el-form>
-      </div>
-    </div>
-  </div>
 
-<!--   <div class="flex bg-slate-800 bg-blend-multiply  min-h-screen justify-center items-center">
-    <div class=" grid grid-cols-2 w-1/2 justify-center items-center rounded-md shadow-2xl h-96">
-      <div class="h-full bg-slate-200 justify-center items-center flex">
-        <el-form
-          ref="form"
-          :model="form"
-          :rules="rules"
-          :hide-required-asterisk="true"
-          label-position="top"
-          @submit.native.prevent="submitForm('form')"
-        >
-          <div class="text-center mb-4 font-sans">
-            <div class="text-xl border-b-2 border-slate-800">
-              Asset System
+            <div class="mb-6">
+              <el-form-item>
+                <el-input
+                  v-model="form.password"
+                  type="password"
+                  placeholder="Password"
+                  show-password
+                ></el-input>
+              </el-form-item>
             </div>
-            <div class="text-lg">
-              <div>
-                <span>Login</span>
-              </div>
-            </div>
-          </div>
-          <div class="floating-input mb-5 relative">
-            <el-form-item prop="username">
-              <input v-model="form.username" size="large" placeholder="Username" class="placeholder:text-slate-400 text-center bg-white  rounded-md " />
-            </el-form-item>
-          </div>
-          <div class="floating-input mb-5 relative">
-            <el-form-item prop="password">
-              <input
-                v-model="form.password"
-                size="large"
-                type="password"
-                placeholder="Password"
-                class="placeholder:text-slate-400 text-center bg-white  rounded-md "
-              />
-            </el-form-item>
-          </div>
-          <div class="bg-slate-900 flex justify-centerrounded-md">
-            <button type="primary" native-type="submit" class="justify-center text-white font-serif">
-              Log in
+
+            <!-- Submit button -->
+            <button
+              native-type="submit"
+              type="submit"
+              class="inline-block px-7 py-3 bg-blue-600 text-white font-medium text-sm leading-snug uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out w-full"
+              data-mdb-ripple="true"
+              data-mdb-ripple-color="light"
+            >
+              Sign in
             </button>
-          </div>
-        </el-form>
-      </div>
-      <div class="h-full">
-        <img src="../../assets/img/assets.jpg" alt="" class="h-full">
+
+            <div
+              class="flex items-center my-4 before:flex-1 before:border-t before:border-gray-300 before:mt-0.5 after:flex-1 after:border-t after:border-gray-300 after:mt-0.5"
+            >
+            </div>
+          </el-form>
+        </div>
       </div>
     </div>
-  </div> -->
+  </section>
 </template>
 
 <script>
@@ -119,17 +95,9 @@ export default {
           try {
             this.loading = true
             await this.$auth.loginWith('local', { data: this.form })
-          } catch ({ response: { data } }) {
-            if (data) {
-              this.$message({
-                title: 'error',
-                message: data,
-                type: 'error'
-              })
-            }
+          } catch (err) {
+            this.error = err.response.data
           }
-        } else {
-          return false
         }
       })
     }

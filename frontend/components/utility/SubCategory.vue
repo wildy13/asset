@@ -97,6 +97,7 @@
             <el-form-item label="Sub Code">
               <el-input
                 v-model="form.subcategoryCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Sub Name">
@@ -132,6 +133,7 @@
             <el-form-item label="Sub Code">
               <el-input
                 v-model="formEdit.subcategoryCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Sub Name">

@@ -73,6 +73,7 @@
             <el-form-item label="Code of Dapartment" :label-width="formLabelWidth">
               <el-input
                 v-model="form.dapartmentCode"
+                type="number"
               />
             </el-form-item>
           </el-form>
@@ -99,6 +100,7 @@
             <el-form-item label="Code of Dapartment" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.dapartmentCode"
+                type="number"
               />
             </el-form-item>
           </el-form>

@@ -67,6 +67,7 @@
             <el-form-item label="Code">
               <el-input
                 v-model="form.categoryCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Name">
@@ -92,6 +93,7 @@
             <el-form-item label="Code">
               <el-input
                 v-model="formEdit.categoryCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Name">

@@ -12,16 +12,6 @@
           <el-button type="primary" icon="el-icon-printer" @click="gPdf">
             Create Reports
           </el-button>
-
-          <!-- Tag Asset Button -->
-          <!--           <el-button type="primary" icon="el-icon-printer">
-            Tag Asset
-          </el-button> -->
-
-          <!-- Non Tag Button -->
-          <!--           <el-button type="primary" icon="el-icon-printer">
-            Non Tag
-          </el-button> -->
         </div>
         <div>
           <!-- Search -->
@@ -197,7 +187,7 @@
                 </div>
                 <div class="flex justify-start">
                   <el-form-item label="PO No" prop="po">
-                    <el-input v-model="form.po" />
+                    <el-input v-model="form.po" type="number" />
                   </el-form-item>
                 </div>
                 <div class="flex justify-start">
@@ -207,7 +197,7 @@
                 </div>
                 <div class="flex justify-start">
                   <el-form-item label="qty" prop="qty">
-                    <el-input v-model="form.qty" />
+                    <el-input v-model="form.qty" type="number" />
                   </el-form-item>
                 </div>
               </div>
@@ -223,13 +213,13 @@
                           :value="item.id"
                         />
                       </el-select>
-                      <el-input v-model="form.price" />
+                      <el-input v-model="form.price" type="number" />
                     </div>
                   </el-form-item>
                 </div>
                 <div class="flex justify-start">
                   <el-form-item label="Exchange Rate to USD" prop="exchange">
-                    <el-input v-model="form.exchange" placeholder="Input 1 For USD Currency" />
+                    <el-input v-model="form.exchange" placeholder="Input 1 For USD Currency" type="number" />
                   </el-form-item>
                 </div>
                 <b>B. Depreciation</b>

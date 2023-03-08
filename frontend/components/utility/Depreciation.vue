@@ -127,11 +127,13 @@
             <el-form-item label="Rate" :label-width="formLabelWidth">
               <el-input
                 v-model="form.rate"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Life" :label-width="formLabelWidth">
               <el-input
                 v-model="form.year"
+                type="number"
               />
             </el-form-item>
           </el-form>
@@ -192,11 +194,13 @@
             <el-form-item label="Rate" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.rate"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Life" :label-width="formLabelWidth">
               <el-input
                 v-model="formEdit.year"
+                type="number"
               />
             </el-form-item>
           </el-form>

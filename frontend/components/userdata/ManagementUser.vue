@@ -45,7 +45,7 @@
           <el-table-column prop="email" label="Email" class="table-col" />
           <el-table-column label="Dapartment" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row.dapartment.name  }}
+              {{ scope.row.dapartment.name }}
             </template>
           </el-table-column>
           <el-table-column label="Section" class="table-col">
@@ -55,7 +55,7 @@
           </el-table-column>
           <el-table-column label="Role" class="table-col">
             <template slot-scope="scope">
-              {{ scope.row.role.name  }}
+              {{ scope.row.role.name }}
             </template>
           </el-table-column>
           <el-table-column align="right">
@@ -170,6 +170,7 @@
                   <el-form-item prop="employeeNo" label="Employee No" :label-width="formLabelWidth">
                     <el-input
                       v-model="form.employeeNo"
+                      type="number"
                       placeholder="Employee No"
                     />
                   </el-form-item>

@@ -70,7 +70,7 @@
           label-width="120px"
         >
           <el-form-item label="Code" :label-width="formLabelWidth">
-            <el-input v-model="form.currencyCode"></el-input>
+            <el-input v-model="form.currencyCode" type="number"></el-input>
           </el-form-item>
           <el-form-item label="Name">
             <el-input v-model="form.name" :label-width="formLabelWidth"></el-input>
@@ -97,6 +97,7 @@
             <el-form-item label="Code">
               <el-input
                 v-model="formEdit.currencyCode"
+                type="number"
               />
             </el-form-item>
             <el-form-item label="Name">
