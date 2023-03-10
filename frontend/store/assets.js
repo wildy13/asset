@@ -44,7 +44,7 @@ export const actions = {
   },
 
   async fetchPdf ({ commit }) {
-    const res = await this.$axios.$get('/api/asset/download')
+    const res = await this.$axios.$get('/api/pdf/download')
     return res
   }
 }

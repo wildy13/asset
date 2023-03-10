@@ -11,5 +11,6 @@ module.exports = {
     'airbnb-base',
   ],
   plugins: [],
-  rules: {},
+  rules: {
+  },
 };

@@ -1,3 +1,4 @@
+/* eslint-disable linebreak-style */
 /* eslint-disable consistent-return */
 /* eslint-disable no-useless-concat */
 /* eslint-disable no-unused-vars */
@@ -38,7 +39,6 @@ const getAssets = async (req, res) => {
         'type',
         'method',
         'rate',
-        'year',
         'createdAt',
         'updatedAt',
       ],
@@ -89,7 +89,6 @@ const inputAssets = async (req, res) => {
     type,
     method,
     rate,
-    year,
   } = req.body;
   try {
     const create = await Assets.create({
@@ -110,7 +109,6 @@ const inputAssets = async (req, res) => {
       type,
       method,
       rate,
-      year,
     });
     res.json({ data: create, msg: "yeay Assets's in" });
   } catch (error) {
@@ -154,7 +152,6 @@ const editAssets = async (req, res) => {
       'type',
       'method',
       'rate',
-      'year',
     ],
     where: {
       id: req.params.id,
@@ -177,7 +174,6 @@ const editAssets = async (req, res) => {
   assets.type = req.body.type;
   assets.method = req.body.method;
   assets.rate = req.body.rate;
-  assets.year = req.body.year;
 
   const save = await assets.save();
   res.status(200).json(save);
@@ -205,7 +201,6 @@ const generatePdf = async (req, res, next) => {
         'type',
         'method',
         'rate',
-        'year',
         'createdAt',
         'updatedAt',
       ],

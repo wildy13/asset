@@ -1,3 +1,5 @@
+/* eslint-disable linebreak-style */
+/* eslint-disable import/newline-after-import */
 const auth = require('./api/auth');
 const user = require('./api/user');
 const role = require('./api/role');
@@ -9,6 +11,7 @@ const subcategory = require('./api/utility/subCategory');
 const location = require('./api/utility/location');
 const depreciation = require('./api/utility/depreciation');
 const asset = require('./api/asset');
+const pdf = require('./api/pdf');
 
 const router = (app) => {
   app.use('/api/auth', auth);
@@ -22,6 +25,6 @@ const router = (app) => {
   app.use('/api/utility/location', location);
   app.use('/api/utility/depreciation', depreciation);
   app.use('/api/asset', asset);
+  app.use('/api/pdf', pdf);
 };
-
 module.exports = router;
