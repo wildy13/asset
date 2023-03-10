@@ -12,10 +12,12 @@ const sequelize = new Sequelize(
     dialectOptions: {
       dateStrings: true,
       typeCast: true,
+      useUTC: false,
     },
     define: {
       underscored: false,
     },
+    timezone: '+07:00',
   },
 );
 

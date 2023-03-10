@@ -1,8 +1,10 @@
+/* eslint-disable linebreak-style */
 const express = require('express');
 const cors = require('cors');
 const router = require('./router');
 const { sequelize, config: { host, port } } = require('./config');
 const { verifyToken } = require('./api/auth/service');
+// const Assets = require('./api/asset/model');
 // const User = require('./api/user/model');
 
 const app = express();
@@ -22,7 +24,7 @@ const connect = async () => {
 const start = async () => {
   try {
     router(app);
-    // User.sync({ force: true }); // <------Force Model to database
+    // Assets.sync({ force: true }); // <------Force Model to database
     app.listen({ port, host }, () => console.log(`Server running on port ${port}`));
     await connect();
   } catch (err) {

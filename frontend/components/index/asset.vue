@@ -192,7 +192,7 @@
                 </div>
                 <div class="flex justify-start">
                   <el-form-item label="Acquired Date" prop="date">
-                    <el-input v-model="form.date" type="date" />
+                    <el-date-picker v-model="form.date" type="datetime" />
                   </el-form-item>
                 </div>
                 <div class="flex justify-start">
@@ -243,11 +243,6 @@
                 <div class="flex justify-start">
                   <el-form-item label="Rates" prop="rate">
                     <el-input v-model="formChange.rate" disabled />
-                  </el-form-item>
-                </div>
-                <div class="flex justify-start">
-                  <el-form-item label="Life" prop="year">
-                    <el-input v-model="formChange.year" disabled />
                   </el-form-item>
                 </div>
               </div>
@@ -313,7 +308,6 @@ export default {
       },
       formChange: {
         method: '',
-        year: '',
         type: '',
         rate: ''
       },
@@ -337,7 +331,6 @@ export default {
       /* array  */
       method: [''],
       rate: [''],
-      year: [''],
       type: [''],
       /* end of array */
       page: 1,
@@ -495,6 +488,7 @@ export default {
     ...mapActions('depreciation', ['filterDepreciation']),
     ...mapActions('assets', ['inputAssets', 'fetchAssets', 'fetchDel', 'fetchEdit', 'fetchPdf']),
     onSave () {
+      console.log(this.form)
       try {
         this.inputAssets({
           name: this.form.name,
@@ -513,7 +507,6 @@ export default {
           method: this.formChange.method,
           type: this.formChange.type,
           rate: this.formChange.rate,
-          year: this.formChange.year,
           status: this.form.status
         })
         this.$message({

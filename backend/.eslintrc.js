@@ -12,5 +12,6 @@ module.exports = {
   ],
   plugins: [],
   rules: {
+    'eslintlinebreak-style': 0,
   },
 };
