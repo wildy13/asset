@@ -1,7 +1,7 @@
 
- .el-menu
+.el-menu-vertical-demo
 {
-    @apply flex w-full
+    @apply h-screen
 } 
 
 .el-input__inner
@@ -29,4 +29,8 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+.txt-end{
+  @apply text-end
 }

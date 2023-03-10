@@ -1,118 +1,86 @@
 <template>
-  <div class="flex justify-between">
-    <el-menu
-      :default-active="activeIndex"
-      mode="horizontal"
-      @select="handleSelect"
-    >
-      <div class="col-start-1 flex">
-        <el-menu-item index="dashboard">
-          Dashboard
-        </el-menu-item>
-        <el-submenu index="2">
-          <template slot="title">
-            Utility
-          </template>
-          <div>
-            <el-menu-item index="currency">
-              Currency
-            </el-menu-item>
-            <el-menu-item index="asset-category">
-              Asset Category
-            </el-menu-item>
-            <el-menu-item index="asset-subcategory">
-              Asset SubCategory
-            </el-menu-item>
-            <el-menu-item index="category-of-depreciation">
-              Category of Depreciation
-            </el-menu-item>
-            <el-menu-item index="location">
-              location
-            </el-menu-item>
+  <div>
+    <div>
+      <el-col :span="5">
+        <el-menu
+          :default-active="activeIndex"
+          class="el-menu-vertical-demo"
+          background-color="#545c64"
+          text-color="#fff"
+          active-text-color="#ffd04b"
+          @select="handleSelect"
+        >
+          <div class="text-white text-2xl text-center">
+            DASHBOARD | Labtech
+          </div>
+          <el-menu-item index="dashboard">
+            <i class="el-icon-menu"></i>
+            <span>Dashboard</span>
+          </el-menu-item>
+          <el-submenu index="2">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>Utility</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="currency">
+                Currency
+              </el-menu-item>
+              <el-menu-item index="asset-category">
+                Asset Category
+              </el-menu-item>
+              <el-menu-item index="asset-subcategory">
+                Asset SubCategory
+              </el-menu-item>
+              <el-menu-item index="category-of-depreciation">
+                Category of Depreciation
+              </el-menu-item>
+              <el-menu-item index="location">
+                Location
+              </el-menu-item>
+            </el-menu-item-group>
             <el-menu-item index="adjustment-asset">
               Adjustment Asset
             </el-menu-item>
-          </div>
-        </el-submenu>
-        <el-menu-item index="Asset">
-          Asset
-        </el-menu-item>
-        <el-submenu index="4">
-          <template slot="title">
-            Report
-          </template>
-          <div>
-            <el-menu-item index="AssetSummary">
-              Asset Summary
-            </el-menu-item>
-            <el-menu-item index="AssetSummarySub">
-              Asset Summary Sub
-            </el-menu-item>
-            <el-menu-item index="AssetAll">
-              Asset All
-            </el-menu-item>
-            <el-menu-item index="AssetAllDetail">
-              Asset All Detail
-            </el-menu-item>
-            <el-menu-item index="AssetAllMonth">
-              Asset All Month
-            </el-menu-item>
-            <el-menu-item index="AssetFinancial">
-              Asset Financial
-            </el-menu-item>
-            <el-menu-item index="AssetDisposal">
-              Asset Disposal
-            </el-menu-item>
-            <el-menu-item index="AssetDisposalDetail">
-              Asset Disposal Detail
-            </el-menu-item>
-            <el-menu-item index="AssetLabeling">
-              Asset Labeling
-            </el-menu-item>
-            <el-menu-item index="AssetAllocation">
-              Asset Allocation
-            </el-menu-item>
-          </div>
-        </el-submenu>
-        <el-submenu v-if="$auth.user.roleId === 1" index="5">
-          <template slot="title">
-            User Data
-          </template>
-          <div>
-            <el-menu-item index="dapartment">
-              Dapartement
-            </el-menu-item>
-            <el-menu-item index="section">
-              Section
-            </el-menu-item>
-            <el-menu-item index="role-user">
-              Role
-            </el-menu-item>
-            <el-menu-item index="management-user">
-              Management User
-            </el-menu-item>
-          </div>
-        </el-submenu>
-        <el-menu-item index="change-password">
-          Change Password
-        </el-menu-item>
-      </div>
-      <div class="flex w-full justify-end">
-        <div>
-          <el-menu-item>
-            logged in as {{ $auth.user.username }}
+          </el-submenu>
+          <el-menu-item index="Asset">
+            <i class="el-icon-menu"></i>
+            <span>Asset</span>
           </el-menu-item>
-        </div>
-        <div>
+          <!--<el-menu-item index="3" disabled>
+            <i class="el-icon-document"></i>
+            <span>Navigator Three</span>
+          </el-menu-item> -->
+          <el-submenu v-if="$auth.user.roleId === 1" index="5">
+            <template slot="title">
+              <i class="el-icon-location"></i>
+              <span>User Management</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="dapartment">
+                Dapartment
+              </el-menu-item>
+              <el-menu-item index="section">
+                Section
+              </el-menu-item>
+              <el-menu-item index="role-user">
+                Role
+              </el-menu-item>
+              <el-menu-item index="management-user">
+                Management User
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
+          <el-menu-item index="change-password">
+            <i class="el-icon-setting"></i>
+            <span>Change Passowrd</span>
+          </el-menu-item>
           <el-menu-item index="logout">
-            Logout
+            <i class="el-icon-setting"></i>
+            <span>Logout</span>
           </el-menu-item>
-        </div>
-      </div>
-    </el-menu>
-    <div>
-      <div>
-      </div>
+        </el-menu>
+      </el-col>
     </div>
   </div>
 </template>
@@ -121,7 +89,7 @@
 export default {
   data () {
     return {
-      activeIndex: 'dapartement',
+      activeIndex: 'dashboard',
       open: false
     }
   },

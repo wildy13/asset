@@ -1,7 +1,9 @@
 <template>
   <div>
-    <GeneralHeader />
     <GeneralNavbar />
-    <Nuxt />
+    <div>
+      <GeneralHeader />
+      <Nuxt />
+    </div>
   </div>
 </template>
