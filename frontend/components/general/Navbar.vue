@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <el-col :span="5">
+      <el-col>
         <el-menu
           :default-active="activeIndex"
           class="el-menu-vertical-demo"

@@ -3,7 +3,6 @@
 {
     @apply h-screen
 } 
-
 .el-input__inner
 {
     @apply w-full placeholder:italic placeholder:text-red-400
@@ -14,6 +13,9 @@
     @apply w-full flex justify-end
 }
 
+.el-button {
+  @apply m-4
+}
 .el-dialog
 {
     @apply w-max
@@ -33,4 +35,8 @@ input[type=number] {
 
 .txt-end{
   @apply text-end
+}
+
+.el-col{
+  width: 100%;
 }

@@ -15,7 +15,6 @@
         <el-form
           :ref="form"
           :model="form"
-          label-width="200px"
           :rules="rules"
         >
           <div>
@@ -56,7 +55,7 @@ import { mapActions } from 'vuex'
 export default {
   data () {
     return {
-      formLabelWidth: '120px',
+      formLabelWidth: '200px',
       form: {
         oldPass: '',
         newPass: '',
