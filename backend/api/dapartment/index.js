@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { isAdmin } = require('../auth/service');
+const { isAdmin, isAuthenticated } = require('../auth/service');
 const {
   getDapartment, inputDapartment, deleteDapartment, editDapartment,
 } = require('./controller');
@@ -7,7 +7,7 @@ const {
 const router = new Router();
 
 // Get Router
-router.get('/', isAdmin(), getDapartment);
+router.get('/', isAuthenticated(), getDapartment);
 
 // POST Router
 router.post('/', isAdmin(), inputDapartment);

@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { isAdmin } = require('../auth/service');
+const { isAdmin, isAuthenticated } = require('../auth/service');
 const {
   getRole, inputRole, deleteRoles, editRoles,
 } = require('./controller');
@@ -7,7 +7,7 @@ const {
 const router = new Router();
 
 // Get Router
-router.get('/', isAdmin(), getRole);
+router.get('/', isAuthenticated(), getRole);
 
 // POST Router
 router.post('/', isAdmin(), inputRole);

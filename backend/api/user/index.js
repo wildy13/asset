@@ -7,7 +7,7 @@ const { isAuthenticated, isAdmin } = require('../auth/service');
 const router = new Router();
 
 // Get Router
-router.get('/', isAdmin(), getUser);
+router.get('/', isAuthenticated(), getUser);
 router.get('/me', isAuthenticated(), getMe);
 
 // POST Router
