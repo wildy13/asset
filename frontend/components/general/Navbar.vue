@@ -10,14 +10,14 @@
           active-text-color="#ffd04b"
           @select="handleSelect"
         >
-          <div class="text-white text-2xl text-center">
+          <div class="text-white text-2xl text-center mt-4">
             DASHBOARD | Labtech
           </div>
           <el-menu-item index="dashboard">
             <i class="el-icon-menu"></i>
             <span>Dashboard</span>
           </el-menu-item>
-          <el-submenu index="2">
+          <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>Utility</span>
@@ -44,16 +44,16 @@
             </el-menu-item>
           </el-submenu>
           <el-menu-item index="Asset">
-            <i class="el-icon-menu"></i>
+            <i class="el-icon-eleme"></i>
             <span>Asset</span>
           </el-menu-item>
           <!--<el-menu-item index="3" disabled>
             <i class="el-icon-document"></i>
             <span>Navigator Three</span>
           </el-menu-item> -->
-          <el-submenu v-if="$auth.user.roleId === 1" index="5">
+          <el-submenu v-if="$auth.user.roleId === 1" index="2">
             <template slot="title">
-              <i class="el-icon-location"></i>
+              <i class="el-icon-user"></i>
               <span>User Management</span>
             </template>
             <el-menu-item-group>
@@ -71,14 +71,20 @@
               </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-          <el-menu-item index="change-password">
-            <i class="el-icon-setting"></i>
-            <span>Change Passowrd</span>
-          </el-menu-item>
-          <el-menu-item index="logout">
-            <i class="el-icon-setting"></i>
-            <span>Logout</span>
-          </el-menu-item>
+          <el-submenu index="3">
+            <template slot="title">
+              <i class="el-icon-setting"></i>
+              <span>Settings</span>
+            </template>
+            <el-menu-item-group>
+              <el-menu-item index="change-password">
+                Change Password
+              </el-menu-item>
+              <el-menu-item index="logout">
+                Log out
+              </el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
       </el-col>
     </div>
